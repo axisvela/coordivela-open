@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: COORDIVELA Coordination API
+  version: 0.1.0
+  description: |
+    Public contract for the COORDIVELA Development Coordination Control Plane.
+    Work state, leases, progress, interventions, and schedules are coordinated
+    here; execution and verification remain with PRAXOVELA and TEKMOVELA.
+servers:
+  - url: http://localhost:1976/v1
+security:
+  - TrustedContext: []
+paths:
+  /work-items:
+    get:
+      summary: List work items in the current workspace
+      parameters:
+        - name: state
+          in: query
+          schema: { type: string }
+        - name: program_id
+          in: query
+          schema: { type: string }
+      responses:
+        "200":
+          description: Work items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workItems:
+                    type: array
+                    items: { $ref: "#/components/schemas/WorkItem" }
+    post:
+      summary: Create a work item
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateWorkItem" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/WorkItem" }
+  /work-items/{id}:
+    get:
+      summary: Get a work item
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+      responses:
+        "200":
+          description: Work item
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/WorkItem" }
+        "404":
+          description: Not found in this tenant/workspace
+  /work-items/{id}/transition:
+    post:
+      summary: Apply a guarded state transition
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TransitionRequest" }
+      responses:
+        "200":
+          description: Updated work item
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/WorkItem" }
+        "409":
+          description: Stale version or invalid transition
+  /work-items/{id}/assign:
+    post:
+      summary: Assign an owner and acquire a lease
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AssignRequest" }
+      responses:
+        "200":
+          description: Assignment and lease
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Assignment" }
+        "409":
+          description: Lease conflict
+  /work-items/{id}/progress:
+    post:
+      summary: Report a progress event
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProgressEvent" }
+      responses:
+        "202":
+          description: Accepted
+  /work-items/{id}/interventions:
+    post:
+      summary: Request a governed intervention
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InterventionRequest" }
+      responses:
+        "202":
+          description: Intervention accepted
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Intervention" }
+  /schedules:
+    get:
+      summary: List schedules
+      responses:
+        "200":
+          description: Schedules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schedules:
+                    type: array
+                    items: { $ref: "#/components/schemas/Schedule" }
+    post:
+      summary: Define a schedule (execution belongs to PRAXOVELA)
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Schedule" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Schedule" }
+components:
+  securitySchemes:
+    TrustedContext:
+      type: apiKey
+      in: header
+      name: X-Axis-Principal
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string }
+    WorkItemId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string }
+  schemas:
+    WorkItem:
+      type: object
+      required: [id, tenantId, workspaceId, title, state, version]
+      properties:
+        id: { type: string }
+        tenantId: { type: string }
+        workspaceId: { type: string }
+        programId: { type: string }
+        milestoneId: { type: string }
+        title: { type: string }
+        description: { type: string }
+        state:
+          type: string
+          enum: [proposed, ready, assigned, executing, blocked, review, verifying, done, failed, cancelled]
+        priority: { type: integer }
+        ownerKind: { type: string }
+        ownerRef: { type: string }
+        version: { type: integer, format: int64 }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    CreateWorkItem:
+      type: object
+      required: [id, title]
+      properties:
+        id: { type: string }
+        programId: { type: string }
+        milestoneId: { type: string }
+        title: { type: string }
+        description: { type: string }
+        priority: { type: integer }
+        stallAfter: { type: string, example: "20m" }
+        acceptance:
+          type: array
+          items: { type: string }
+    TransitionRequest:
+      type: object
+      required: [to, expectedVersion]
+      properties:
+        to:
+          type: string
+          enum: [ready, assigned, executing, blocked, review, verifying, done, failed, cancelled]
+        expectedVersion: { type: integer, format: int64 }
+        reason: { type: string }
+    AssignRequest:
+      type: object
+      required: [assigneeKind, assigneeRef, leaseSeconds, expectedVersion]
+      properties:
+        assigneeKind: { type: string, enum: [human, agent, team] }
+        assigneeRef: { type: string }
+        leaseSeconds: { type: integer }
+        expectedVersion: { type: integer, format: int64 }
+    Assignment:
+      type: object
+      properties:
+        assignmentId: { type: string }
+        workItemId: { type: string }
+        leaseId: { type: string }
+        fencingToken: { type: integer, format: int64 }
+        expiresAt: { type: string, format: date-time }
+    ProgressEvent:
+      type: object
+      required: [source, kind]
+      properties:
+        source: { type: string, enum: [agent, human, rheovela, ci] }
+        kind: { type: string, enum: [heartbeat, step, commit, test, review] }
+        payload:
+          type: object
+          additionalProperties: true
+        occurredAt: { type: string, format: date-time }
+    InterventionRequest:
+      type: object
+      required: [action, reason]
+      properties:
+        policyId: { type: string }
+        action: { type: string, enum: [nudge, retry, reassign, escalate, pause, cancel] }
+        reason: { type: string }
+    Intervention:
+      type: object
+      properties:
+        id: { type: string }
+        workItemId: { type: string }
+        action: { type: string }
+        outcome: { type: string }
+        authorizationRef: { type: string }
+        createdAt: { type: string, format: date-time }
+    Schedule:
+      type: object
+      required: [id, kind, expression]
+      properties:
+        id: { type: string }
+        workItemId: { type: string }
+        kind: { type: string, enum: [cron, interval, once, event] }
+        expression: { type: string }
+        timezone: { type: string }
+        misfirePolicy: { type: string, enum: [skip, catch_up, run_once] }
+        enabled: { type: boolean }
+        nextRun: { type: string, format: date-time }
