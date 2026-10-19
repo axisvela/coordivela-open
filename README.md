@@ -2,7 +2,8 @@
 
 **Public integration surface for the Development Coordination Control Plane**
 
-Apache-2.0 contracts, SDKs, examples, and approved binaries for COORDIVELA.
+Apache-2.0 public contracts, SDKs, examples, and the approved binary
+distribution surface for COORDIVELA.
 
 > COORDIVELA coordinates development work across humans and agents. It does not
 > execute code or verify correctness; those remain with PRAXOVELA and TEKMOVELA.
@@ -11,9 +12,13 @@ Apache-2.0 contracts, SDKs, examples, and approved binaries for COORDIVELA.
 
 | Repository | License | Role |
 | --- | --- | --- |
-| `coordivela-open` | Apache-2.0 | Public contracts, SDKs, examples, approved binaries |
-| `coordivela` | AGPL-3.0 | Open-core coordination runtime |
-| `coordivela-ee` | Enterprise | Enterprise features and internal product governance |
+| `coordivela` | AGPL-3.0 | Community coordination runtime for a single human or small team. Reference profile: fewer than five concurrent agents |
+| `coordivela-open` | Apache-2.0 | Public contracts, SDKs, examples, and approved core/adapter/probe binaries |
+| `coordivela-ee` | Commercial | Enterprise governance, multi-tenant scale, HA, federation, compliance, and managed operations |
+
+Core and open share a version line. EE releases independently and states the
+core range it supports. The agent-count example is a scope target, not a
+license-enforced counter.
 
 ## This Repository
 
@@ -21,8 +26,27 @@ Apache-2.0 contracts, SDKs, examples, and approved binaries for COORDIVELA.
   assignments, progress, interventions, and schedules.
 - `sdk/go/` - Go SDK.
 - `examples/quickstart/` - end-to-end API example.
-- `releases/` - approved binaries and manifests (published by the core release
-  process).
+- `releases/` - approved binaries, manifests, checksums, and SBOMs published by
+  the core release process.
+
+## Binary Distribution
+
+`coordivela-open` is the distribution home for approved COORDIVELA binaries:
+
+| Binary | Source | Purpose |
+| --- | --- | --- |
+| `coordivela` | core | Coordination server |
+| `coordivela-migrate` | core | Schema migration helper |
+| `coordivela-opencode-probe` | core | Read-only OpenCode observation and probe |
+| Adapter binaries | core/adapters | PRAXOVELA, OpenCode, and process adapters when packaged as separate binaries |
+
+Each release manifest records the binary version, source repository, license,
+checksums, and SBOM. Binaries retain the license of their source; the contracts,
+SDK, and examples in this repository are Apache-2.0. Enterprise-only binaries
+are never published here.
+
+The repository is currently at `0.1.0`; binary payloads are added by the core
+release process and are not present yet.
 
 ## Quickstart
 
