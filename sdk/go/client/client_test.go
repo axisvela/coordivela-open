@@ -181,3 +181,46 @@ func TestSymbivelaAttentionProjection(t *testing.T) {
 		t.Fatalf("items = %+v", items)
 	}
 }
+
+func TestConflictOverrideSDK(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("Idempotency-Key") == "" {
+			http.Error(w, "missing idempotency key", http.StatusBadRequest)
+			return
+		}
+		switch {
+		case r.Method == http.MethodPost && r.URL.Path == "/v1/work-items/wi-1/conflict-override":
+			_ = json.NewEncoder(w).Encode(WorkItem{
+				ID: "wi-1", State: "ready", Version: 2,
+				ConflictOverride: &ConflictOverride{Reason: "planned overlap", ActorRef: "alice"},
+			})
+		case r.Method == http.MethodDelete && r.URL.Path == "/v1/work-items/wi-1/conflict-override":
+			if r.URL.Query().Get("expectedVersion") != "2" {
+				http.Error(w, "bad version", http.StatusBadRequest)
+				return
+			}
+			_ = json.NewEncoder(w).Encode(WorkItem{ID: "wi-1", State: "ready", Version: 3})
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer srv.Close()
+
+	c := New(srv.URL, "acme", "default")
+	item, err := c.OverrideConflicts(context.Background(), "wi-1", ConflictOverrideRequest{
+		Reason: "planned overlap", TTLSeconds: 300, ExpectedVersion: 1, IdempotencyKey: "override-1",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if item.ConflictOverride == nil || item.ConflictOverride.Reason != "planned overlap" {
+		t.Fatalf("item = %+v", item)
+	}
+	cleared, err := c.ClearConflictOverride(context.Background(), "wi-1", item.Version, "override-2")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cleared.Version != 3 {
+		t.Fatalf("cleared = %+v", cleared)
+	}
+}

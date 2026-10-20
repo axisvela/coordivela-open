@@ -354,6 +354,59 @@ paths:
           $ref: "#/components/responses/NotFound"
         "409":
           $ref: "#/components/responses/Conflict"
+  /work-items/{id}/conflict-override:
+    post:
+      tags: [Lifecycle]
+      operationId: overrideConflicts
+      summary: Record an authorized path-conflict override
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConflictOverrideRequest"
+      responses:
+        "200":
+          description: Work item with a conflict override
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+    delete:
+      tags: [Lifecycle]
+      operationId: clearConflictOverride
+      summary: Clear a path-conflict override
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+        - name: expectedVersion
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Work item without a conflict override
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
   /work-items/{id}/assign:
     post:
       tags: [Lifecycle]
@@ -1388,6 +1441,18 @@ components:
           type: string
         reason:
           type: string
+    ConflictOverrideRequest:
+      type: object
+      required: [reason, expectedVersion]
+      properties:
+        reason:
+          type: string
+        ttlSeconds:
+          type: integer
+          minimum: 1
+        expectedVersion:
+          type: integer
+          format: int64
     AssignRequest:
       type: object
       required: [ownerKind, ownerRef, expectedVersion]
