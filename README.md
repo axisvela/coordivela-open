@@ -101,7 +101,7 @@ license-enforced counter.
 
 ## Current Release
 
-`1.2.0` is the current source release, matching the core version line.
+`1.3.0` is the current source release, matching the core version line.
 Approved binaries remain published under
 [`releases/v1.0.0/`](releases/v1.0.0/) for windows/amd64, linux/amd64, and
 darwin/arm64. Rebuild binaries from the `v1.1.0` or `v1.2.0` source tag before
