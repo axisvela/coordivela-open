@@ -53,6 +53,7 @@ type WorkItem struct {
 	OwnerRef         string            `json:"ownerRef,omitempty"`
 	LeaseID          string            `json:"leaseId,omitempty"`
 	Lease            *Lease            `json:"lease,omitempty"`
+	Leases           []Lease           `json:"leases,omitempty"`
 	Runtime          *RuntimeRef       `json:"runtime,omitempty"`
 	ExternalRefs     map[string]string `json:"externalRefs,omitempty"`
 	Assignments      []Assignment      `json:"assignments,omitempty"`
@@ -68,6 +69,7 @@ type Lease struct {
 	ID           string `json:"id"`
 	WorkItemID   string `json:"workItemId"`
 	OwnerRef     string `json:"ownerRef"`
+	Scope        string `json:"scope,omitempty"`
 	FencingToken int64  `json:"fencingToken"`
 	AcquiredAt   string `json:"acquiredAt"`
 	ExpiresAt    string `json:"expiresAt"`
@@ -463,6 +465,36 @@ func (c *Client) ReleaseAssignment(ctx context.Context, id, assignmentID string)
 	return out.WorkItem, nil
 }
 
+// ListLeases returns active leases for a work item.
+func (c *Client) ListLeases(ctx context.Context, id string) ([]Lease, error) {
+	var out struct {
+		Leases []Lease `json:"leases"`
+	}
+	if err := c.do(ctx, http.MethodGet, "/v1/work-items/"+pathEscape(id)+"/leases", nil, &out); err != nil {
+		return nil, err
+	}
+	return out.Leases, nil
+}
+
+// AcquireLease adds a collaborator lease with a resource scope.
+func (c *Client) AcquireLease(ctx context.Context, id string, req AcquireLeaseRequest) (*Lease, error) {
+	var out Lease
+	if err := c.do(ctx, http.MethodPost, "/v1/work-items/"+pathEscape(id)+"/leases", req, &out, req.IdempotencyKey); err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ReleaseLease releases a collaborator lease.
+func (c *Client) ReleaseLease(ctx context.Context, id, leaseID string, fencingToken int64, idempotencyKey ...string) error {
+	key := ""
+	if len(idempotencyKey) > 0 {
+		key = idempotencyKey[0]
+	}
+	path := "/v1/work-items/" + pathEscape(id) + "/leases/" + pathEscape(leaseID) + "?fencingToken=" + strconv.FormatInt(fencingToken, 10)
+	return c.do(ctx, http.MethodDelete, path, nil, &statusResponse{}, key)
+}
+
 // MarkReady marks work ready after dependency checks.
 func (c *Client) MarkReady(ctx context.Context, id string) (*WorkItem, error) {
 	var out WorkItem
@@ -787,6 +819,14 @@ func newIdempotencyKey() string {
 		return fmt.Sprintf("sdk-%d", time.Now().UnixNano())
 	}
 	return fmt.Sprintf("sdk-%x", raw)
+}
+
+// AcquireLeaseRequest asks for a collaborator lease scope.
+type AcquireLeaseRequest struct {
+	OwnerRef       string `json:"ownerRef"`
+	Scope          string `json:"scope"`
+	TTLSeconds     int    `json:"ttlSeconds,omitempty"`
+	IdempotencyKey string `json:"-"`
 }
 
 // ConflictOverrideRequest records an authorized path-conflict override.

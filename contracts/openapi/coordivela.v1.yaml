@@ -282,6 +282,80 @@ paths:
           $ref: "#/components/responses/NotFound"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/leases:
+    get:
+      tags: [Lifecycle]
+      operationId: listLeases
+      summary: List active collaborator leases
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      responses:
+        "200":
+          description: Active leases
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeaseList"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags: [Lifecycle]
+      operationId: acquireLease
+      summary: Acquire a collaborator lease with a resource scope
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AcquireLeaseRequest"
+      responses:
+        "201":
+          description: Acquired lease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lease"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/leases/{leaseId}:
+    delete:
+      tags: [Lifecycle]
+      operationId: releaseLease
+      summary: Release a collaborator lease
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - name: leaseId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+        - name: fencingToken
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Lease released
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
   /work-items/{id}/assignments:
     post:
       tags: [Assignments]
@@ -1225,6 +1299,10 @@ components:
           type: string
         lease:
           $ref: "#/components/schemas/Lease"
+        leases:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lease"
         runtime:
           $ref: "#/components/schemas/RuntimeRef"
         externalRefs:
@@ -1257,6 +1335,8 @@ components:
         workItemId:
           type: string
         ownerRef:
+          type: string
+        scope:
           type: string
         fencingToken:
           type: integer
@@ -1761,3 +1841,22 @@ components:
       properties:
         error:
           type: string
+    LeaseList:
+      type: object
+      required: [leases]
+      properties:
+        leases:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lease"
+    AcquireLeaseRequest:
+      type: object
+      required: [ownerRef, scope]
+      properties:
+        ownerRef:
+          type: string
+        scope:
+          type: string
+        ttlSeconds:
+          type: integer
+          minimum: 1
