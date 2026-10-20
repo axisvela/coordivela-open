@@ -101,7 +101,7 @@ license-enforced counter.
 
 ## Current Release
 
-`1.0.0` is the current community release, matching the core version line.
+`1.1.0` is the current community release, matching the core version line.
 Approved binaries are published under [`releases/v1.0.0/`](releases/v1.0.0/)
 for windows/amd64, linux/amd64, and darwin/arm64.
 
