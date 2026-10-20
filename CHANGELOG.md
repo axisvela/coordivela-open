@@ -4,6 +4,18 @@ All notable changes to COORDIVELA Open are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- RuntimeAdapter v1 contract under `contracts/runtime-adapter/v1/`, including
+  lifecycle semantics, event vocabulary, error taxonomy, and JSON Schema.
+- Go RuntimeAdapter v1 interface in `sdk/go/adapter`.
+- Public conformance kit in `sdk/go/adapter/conformance`.
+- Core now aliases the published RuntimeAdapter types and runs the public
+  conformance kit in its adapter tests.
+- External RuntimeAdapter v1 example with a passing conformance test under
+  `examples/runtime-adapter/`.
+- Projection and SSE usage examples in the quickstart.
+
 ### Changed
 
 - Expanded the English and Chinese READMEs with COORDIVELA positioning, the

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/axisvela/coordivela-open/contracts/runtime-adapter/v1/schema.json",
+  "title": "COORDIVELA RuntimeAdapter v1",
+  "description": "Public request, snapshot, event, and capability shapes for RuntimeAdapter v1.",
+  "type": "object",
+  "$defs": {
+    "eventKind": {
+      "type": "string",
+      "enum": [
+        "started",
+        "output_activity",
+        "waiting_for_input",
+        "waiting_for_approval",
+        "idle",
+        "heartbeat",
+        "stalled",
+        "exited",
+        "error",
+        "completed"
+      ]
+    },
+    "approvalDecision": {
+      "type": "string",
+      "enum": ["approve", "deny"]
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interactive",
+        "structuredStream",
+        "approvalHook",
+        "sessionResume",
+        "cancel",
+        "pty",
+        "http",
+        "workspaceIsolation",
+        "evidenceHooks"
+      ],
+      "properties": {
+        "interactive": { "type": "boolean" },
+        "structuredStream": { "type": "boolean" },
+        "approvalHook": { "type": "boolean" },
+        "sessionResume": { "type": "boolean" },
+        "cancel": { "type": "boolean" },
+        "pty": { "type": "boolean" },
+        "http": { "type": "boolean" },
+        "workspaceIsolation": { "type": "boolean" },
+        "evidenceHooks": { "type": "boolean" }
+      }
+    },
+    "startRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workItemId", "workspace", "prompt"],
+      "properties": {
+        "workItemId": { "type": "string", "minLength": 1 },
+        "workspace": { "type": "string" },
+        "prompt": { "type": "string" },
+        "model": { "type": "string" },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runId", "state", "pendingInput", "pendingApproval"],
+      "properties": {
+        "runId": { "type": "string" },
+        "state": { "type": "string", "minLength": 1 },
+        "lastOutputAt": { "type": "string", "format": "date-time" },
+        "pendingInput": { "type": "boolean" },
+        "pendingApproval": { "type": "boolean" },
+        "requestId": { "type": "string" },
+        "exitCode": { "type": "integer" },
+        "output": { "type": "string" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runId", "kind", "at"],
+      "properties": {
+        "runId": { "type": "string" },
+        "kind": { "$ref": "#/$defs/eventKind" },
+        "at": { "type": "string", "format": "date-time" },
+        "message": { "type": "string" },
+        "requestId": { "type": "string" },
+        "risk": { "type": "string" },
+        "data": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "kind": { "const": "waiting_for_approval" } }
+          },
+          "then": { "required": ["requestId"] }
+        }
+      ]
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "unsupported",
+            "unavailable",
+            "unauthenticated",
+            "invalid_request",
+            "conflict"
+          ]
+        },
+        "message": { "type": "string" },
+        "retryable": { "type": "boolean" }
+      }
+    }
+  }
+}
