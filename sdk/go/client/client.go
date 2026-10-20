@@ -70,6 +70,7 @@ type Lease struct {
 	WorkItemID   string `json:"workItemId"`
 	OwnerRef     string `json:"ownerRef"`
 	Scope        string `json:"scope,omitempty"`
+	CanComplete  bool   `json:"canComplete,omitempty"`
 	FencingToken int64  `json:"fencingToken"`
 	AcquiredAt   string `json:"acquiredAt"`
 	ExpiresAt    string `json:"expiresAt"`
@@ -826,6 +827,7 @@ type AcquireLeaseRequest struct {
 	OwnerRef       string `json:"ownerRef"`
 	Scope          string `json:"scope"`
 	TTLSeconds     int    `json:"ttlSeconds,omitempty"`
+	CanComplete    bool   `json:"canComplete,omitempty"`
 	IdempotencyKey string `json:"-"`
 }
 

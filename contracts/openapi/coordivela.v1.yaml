@@ -1338,6 +1338,8 @@ components:
           type: string
         scope:
           type: string
+        canComplete:
+          type: boolean
         fencingToken:
           type: integer
           format: int64
@@ -1530,9 +1532,6 @@ components:
         ttlSeconds:
           type: integer
           minimum: 1
-        expectedVersion:
-          type: integer
-          format: int64
     AssignRequest:
       type: object
       required: [ownerKind, ownerRef, expectedVersion]
@@ -1860,3 +1859,5 @@ components:
         ttlSeconds:
           type: integer
           minimum: 1
+        canComplete:
+          type: boolean
