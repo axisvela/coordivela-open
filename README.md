@@ -90,6 +90,8 @@ license-enforced counter.
 - `contracts/openapi/coordivela.v1.yaml` - public HTTP contract.
 - `sdk/go/` - Go SDK.
 - `examples/quickstart/` - end-to-end API example.
+- [`docs/OPERATIONS.md`](docs/OPERATIONS.md) - installation, configuration,
+  PostgreSQL, backup, upgrade, monitoring, and troubleshooting.
 - `releases/` - approved binaries, manifests, checksums, license notices, and
   CycloneDX SBOMs.
 
