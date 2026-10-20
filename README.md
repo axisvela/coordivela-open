@@ -101,21 +101,20 @@ license-enforced counter.
 
 ## Current Release
 
-`1.3.0` is the current source release, matching the core version line.
-Approved binaries remain published under
-[`releases/v1.0.0/`](releases/v1.0.0/) for windows/amd64, linux/amd64, and
-darwin/arm64. Rebuild binaries from the `v1.1.0` or `v1.2.0` source tag before
-publishing them.
+`1.3.0` is the current release, matching the core version line. Signed
+binaries, checksums, and SBOMs are published under
+[`releases/v1.3.0/`](releases/v1.3.0/) for windows/amd64, linux/amd64, and
+darwin/arm64.
 
 Known limitations:
 
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
 
-The OpenAPI contract is revision `1.2.0` and covers the published `/v1` routes.
+The OpenAPI contract is revision `1.3.0` and covers the published `/v1` routes.
 
 The RuntimeAdapter v1 contract, Go interface, JSON Schema, and conformance kit
-are included in the `v1.1.0` and `v1.2.0` source releases under
+are included in the `v1.1.0` through `v1.3.0` source releases under
 `contracts/runtime-adapter/v1/`, `sdk/go/adapter/`, and
 `sdk/go/adapter/conformance/`.
 
