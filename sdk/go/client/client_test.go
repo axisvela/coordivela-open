@@ -224,3 +224,42 @@ func TestConflictOverrideSDK(t *testing.T) {
 		t.Fatalf("cleared = %+v", cleared)
 	}
 }
+
+func TestLeaseSDK(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case r.Method == http.MethodGet && r.URL.Path == "/v1/work-items/wi-1/leases":
+			_ = json.NewEncoder(w).Encode(map[string]any{"leases": []Lease{{ID: "lease-1", Scope: "backend/internal", FencingToken: 2}}})
+		case r.Method == http.MethodPost && r.URL.Path == "/v1/work-items/wi-1/leases":
+			if r.Header.Get("Idempotency-Key") == "" {
+				http.Error(w, "missing idempotency key", http.StatusBadRequest)
+				return
+			}
+			_ = json.NewEncoder(w).Encode(Lease{ID: "lease-2", Scope: "frontend/src", FencingToken: 3})
+		case r.Method == http.MethodDelete && r.URL.Path == "/v1/work-items/wi-1/leases/lease-2":
+			if r.URL.Query().Get("fencingToken") != "3" {
+				http.Error(w, "bad token", http.StatusBadRequest)
+				return
+			}
+			_ = json.NewEncoder(w).Encode(map[string]string{"status": "released"})
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer srv.Close()
+
+	c := New(srv.URL, "acme", "default")
+	leases, err := c.ListLeases(context.Background(), "wi-1")
+	if err != nil || len(leases) != 1 || leases[0].Scope != "backend/internal" {
+		t.Fatalf("leases = %+v, err = %v", leases, err)
+	}
+	lease, err := c.AcquireLease(context.Background(), "wi-1", AcquireLeaseRequest{
+		OwnerRef: "collaborator", Scope: "frontend/src", TTLSeconds: 300, IdempotencyKey: "lease-key",
+	})
+	if err != nil || lease.ID != "lease-2" {
+		t.Fatalf("lease = %+v, err = %v", lease, err)
+	}
+	if err := c.ReleaseLease(context.Background(), "wi-1", lease.ID, lease.FencingToken, "release-key"); err != nil {
+		t.Fatal(err)
+	}
+}
