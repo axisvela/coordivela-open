@@ -9,7 +9,8 @@ All notable changes to COORDIVELA Open are documented here.
 - Work-item conflict override routes and SDK methods
   (`POST/DELETE /work-items/{id}/conflict-override`).
 - Resource-scoped collaborator lease routes and SDK methods
-  (`GET/POST /work-items/{id}/leases`, `DELETE /work-items/{id}/leases/{leaseId}`).
+  (`GET/POST /work-items/{id}/leases`, `DELETE /work-items/{id}/leases/{leaseId}`),
+  including optional `canComplete` completion grants.
 
 ## [1.2.0] - 2026-10-20
 
