@@ -2,6 +2,13 @@
 
 All notable changes to COORDIVELA Open are documented here.
 
+## [Unreleased]
+
+### Changed
+
+- Expanded the English and Chinese READMEs with COORDIVELA positioning, the
+  problem it solves, its value, and the Core/Open/EE boundaries.
+
 ## [1.0.0] - 2026-10-20
 
 ### Added
