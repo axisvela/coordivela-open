@@ -857,6 +857,27 @@ paths:
                 $ref: "#/components/schemas/WorkItemList"
         "400":
           $ref: "#/components/responses/BadRequest"
+  /projections/symbivela-attention:
+    get:
+      tags: [Projections]
+      operationId: getSymbivelaAttentionProjection
+      summary: Read SYMBIVELA attention read-only
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      responses:
+        "200":
+          description: SYMBIVELA attention items
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SymbivelaAttentionList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "502":
+          description: SYMBIVELA unavailable
+        "503":
+          description: SYMBIVELA attention is not configured
   /projections/programs/{id}:
     get:
       tags: [Projections]
@@ -1503,6 +1524,28 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/WorkItem"
+    SymbivelaAttentionList:
+      type: object
+      required: [attention]
+      properties:
+        attention:
+          type: array
+          items:
+            $ref: "#/components/schemas/SymbivelaAttention"
+    SymbivelaAttention:
+      type: object
+      required: [attention_id, workspace_id, kind, status]
+      properties:
+        attention_id:
+          type: string
+        workspace_id:
+          type: string
+        kind:
+          type: string
+        status:
+          type: string
+        priority:
+          type: integer
     DependencyList:
       type: object
       required: [dependencies]

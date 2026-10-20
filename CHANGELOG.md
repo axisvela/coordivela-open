@@ -15,6 +15,8 @@ All notable changes to COORDIVELA Open are documented here.
 - External RuntimeAdapter v1 example with a passing conformance test under
   `examples/runtime-adapter/`.
 - Projection and SSE usage examples in the quickstart.
+- `GET /projections/symbivela-attention` and a matching Go SDK method for
+  read-only SYMBIVELA attention.
 
 ### Changed
 

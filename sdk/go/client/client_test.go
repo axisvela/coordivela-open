@@ -160,3 +160,24 @@ func TestStreamEvents(t *testing.T) {
 		t.Fatalf("stream = %q", raw)
 	}
 }
+
+func TestSymbivelaAttentionProjection(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/v1/projections/symbivela-attention" {
+			http.NotFound(w, r)
+			return
+		}
+		_ = json.NewEncoder(w).Encode(map[string]any{
+			"attention": []SymbivelaAttention{{AttentionID: "att-1", WorkspaceID: "default", Kind: "approval", Status: "open", Priority: 2}},
+		})
+	}))
+	defer srv.Close()
+	c := New(srv.URL, "acme", "default")
+	items, err := c.SymbivelaAttention(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(items) != 1 || items[0].AttentionID != "att-1" || items[0].Priority != 2 {
+		t.Fatalf("items = %+v", items)
+	}
+}

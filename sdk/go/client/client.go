@@ -636,6 +636,26 @@ func (c *Client) Attention(ctx context.Context) ([]WorkItem, error) {
 	return out.WorkItems, nil
 }
 
+// SymbivelaAttention is one read-only SYMBIVELA attention item.
+type SymbivelaAttention struct {
+	AttentionID string `json:"attention_id"`
+	WorkspaceID string `json:"workspace_id"`
+	Kind        string `json:"kind"`
+	Status      string `json:"status"`
+	Priority    int    `json:"priority"`
+}
+
+// SymbivelaAttention returns read-only SYMBIVELA attention for the client scope.
+func (c *Client) SymbivelaAttention(ctx context.Context) ([]SymbivelaAttention, error) {
+	var out struct {
+		Attention []SymbivelaAttention `json:"attention"`
+	}
+	if err := c.do(ctx, http.MethodGet, "/v1/projections/symbivela-attention", nil, &out); err != nil {
+		return nil, err
+	}
+	return out.Attention, nil
+}
+
 // Program returns a program projection.
 func (c *Client) Program(ctx context.Context, programID string) ([]WorkItem, map[string]int, error) {
 	var out programProjection
