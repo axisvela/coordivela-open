@@ -45,8 +45,10 @@ checksums, and SBOM. Binaries retain the license of their source; the contracts,
 SDK, and examples in this repository are Apache-2.0. Enterprise-only binaries
 are never published here.
 
-The repository is currently at `0.1.0`; binary payloads are added by the core
-release process and are not present yet.
+The current release is `1.0.0`, matching the core version line. Approved
+binaries are published under [`releases/v1.0.0/`](releases/v1.0.0/) with
+per-platform checksums, license notices, and CycloneDX SBOMs. The OpenAPI
+contract in this repository remains revision `0.1.0`.
 
 ## Quickstart
 
