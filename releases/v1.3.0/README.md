@@ -23,9 +23,10 @@ PostgreSQL schema, and `coordivela-opencode-probe` observes OpenCode sessions.
 
 ## Verification
 
-Each platform directory contains `NOTICE`, `SHA256SUMS`, and
-`SHA256SUMS.asc`. The manifest and SBOMs are also signed. Import the public key
-and verify:
+GitHub release assets include per-platform zip archives, a top-level
+`SHA256SUMS` with its signature, the manifest, SBOMs, and the public key. Each
+platform directory also contains `NOTICE`, `SHA256SUMS`, and `SHA256SUMS.asc`.
+Import the public key and verify:
 
 ```bash
 gpg --import COORDIVELA-RELEASE-SIGNING-KEY.asc
