@@ -88,7 +88,8 @@ license-enforced counter.
 ## What Is In This Repository
 
 - `contracts/openapi/coordivela.v1.yaml` - public HTTP contract.
-- `sdk/go/` - Go SDK.
+- `sdk/go/` - Go SDK covering work items, dependencies, lifecycle, schedules,
+  projections, and SSE.
 - `examples/quickstart/` - end-to-end API example.
 - [`docs/OPERATIONS.md`](docs/OPERATIONS.md) - installation, configuration,
   PostgreSQL, backup, upgrade, monitoring, and troubleshooting.

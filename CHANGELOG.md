@@ -13,6 +13,8 @@ All notable changes to COORDIVELA Open are documented here.
   monitoring, and troubleshooting.
 - Completed the OpenAPI contract for all published `/v1` routes and set the
   contract revision to `1.0.0`.
+- Expanded the Go SDK to cover work-item lifecycle, dependencies, assignments,
+  schedules, projections, and SSE.
 
 ### Fixed
 
