@@ -101,21 +101,23 @@ license-enforced counter.
 
 ## Current Release
 
-`1.0.0` is the current community release, matching the core version line.
-Approved binaries are published under [`releases/v1.0.0/`](releases/v1.0.0/)
-for windows/amd64, linux/amd64, and darwin/arm64.
+`1.2.0` is the current source release, matching the core version line.
+Approved binaries remain published under
+[`releases/v1.0.0/`](releases/v1.0.0/) for windows/amd64, linux/amd64, and
+darwin/arm64. Rebuild binaries from the `v1.1.0` or `v1.2.0` source tag before
+publishing them.
 
 Known limitations:
 
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
 
-The OpenAPI contract is revision `1.0.0` and covers the published `/v1` routes.
+The OpenAPI contract is revision `1.2.0` and covers the published `/v1` routes.
 
-On `main`, the RuntimeAdapter v1 contract, Go interface, JSON Schema, and
-conformance kit are published under `contracts/runtime-adapter/v1/`,
-`sdk/go/adapter/`, and `sdk/go/adapter/conformance/`. These are not part of the
-`v1.0.0` release artifact until a new tag is cut.
+The RuntimeAdapter v1 contract, Go interface, JSON Schema, and conformance kit
+are included in the `v1.1.0` and `v1.2.0` source releases under
+`contracts/runtime-adapter/v1/`, `sdk/go/adapter/`, and
+`sdk/go/adapter/conformance/`.
 
 See the [core roadmap](https://github.com/axisvela/coordivela/blob/main/ROADMAP.md)
 for post-1.0 sequencing.
