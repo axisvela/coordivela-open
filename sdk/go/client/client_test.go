@@ -16,6 +16,10 @@ func TestCreateAndListWorkItems(t *testing.T) {
 		}
 		switch {
 		case r.Method == http.MethodPost && r.URL.Path == "/v1/work-items":
+			if r.Header.Get("Idempotency-Key") == "" {
+				http.Error(w, "missing idempotency key", http.StatusBadRequest)
+				return
+			}
 			var body CreateWorkItem
 			if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 				http.Error(w, err.Error(), http.StatusBadRequest)
@@ -45,5 +49,23 @@ func TestCreateAndListWorkItems(t *testing.T) {
 	}
 	if len(items) != 1 || items[0].ID != "wi-1" {
 		t.Fatalf("items = %+v", items)
+	}
+}
+
+func TestCreateWorkItemWithKey(t *testing.T) {
+	const key = "goal-42-wi-1"
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if got := r.Header.Get("Idempotency-Key"); got != key {
+			http.Error(w, "unexpected idempotency key: "+got, http.StatusBadRequest)
+			return
+		}
+		w.WriteHeader(http.StatusCreated)
+		_ = json.NewEncoder(w).Encode(WorkItem{ID: "wi-1", Title: "test", State: "proposed", Version: 1})
+	}))
+	defer srv.Close()
+
+	c := New(srv.URL, "acme", "default")
+	if _, err := c.CreateWorkItemWithKey(context.Background(), key, CreateWorkItem{ID: "wi-1", Title: "test"}); err != nil {
+		t.Fatal(err)
 	}
 }

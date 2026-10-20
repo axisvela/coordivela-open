@@ -426,7 +426,5 @@ Credentials and raw prompts must not be published.
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
 - `RuntimeAdapter` v1 is not part of the `1.0.0` release.
-- The OpenAPI contract remains revision `0.1.0`; completing it for every `/v1`
-  route is the first post-1.0 roadmap item.
 - Multi-writer leases, HA leader election, multi-repository coordination,
   service identity, federation, and enterprise policy are not core features.

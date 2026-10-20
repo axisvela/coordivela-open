@@ -1,275 +1,1655 @@
 openapi: 3.1.0
 info:
   title: COORDIVELA Coordination API
-  version: 0.1.0
+  version: 1.0.0
   description: |
     Public contract for the COORDIVELA Development Coordination Control Plane.
-    Work state, leases, progress, interventions, and schedules are coordinated
-    here; execution and verification remain with PRAXOVELA and TEKMOVELA.
+
+    Work state, leases, dependencies, schedules, projections, and coordination
+    events are owned here. Execution remains with PRAXOVELA, verification with
+    TEKMOVELA, durable process state with Rheovela, memory with Mnemovela,
+    events with Harmovela, semantics with GNOSIVELA, human collaboration with
+    SYMBIVELA, and authorization policy with AEGIVELA / Archon Guard.
+
+    All `/v1` routes require `X-Axis-Tenant`. Workspace-scoped routes require
+    `X-Axis-Workspace`. Mutating routes require `Idempotency-Key`. The gateway
+    supplies tenant, workspace, and principal identity; Core does not issue or
+    verify service identities.
+
+    Health endpoints are exposed outside `/v1` and are documented at the end of
+    this contract with their own server override.
 servers:
   - url: http://localhost:1976/v1
-security:
-  - TrustedContext: []
+tags:
+  - name: Work items
+  - name: Dependencies
+  - name: Assignments
+  - name: Lifecycle
+  - name: Schedules
+  - name: Projections
+  - name: Events
+  - name: Operations
 paths:
   /work-items:
     get:
-      summary: List work items in the current workspace
+      tags: [Work items]
+      operationId: listWorkItems
+      summary: List work items in the current tenant/workspace
       parameters:
-        - name: state
-          in: query
-          schema: { type: string }
-        - name: program_id
-          in: query
-          schema: { type: string }
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeader"
       responses:
         "200":
           description: Work items
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  workItems:
-                    type: array
-                    items: { $ref: "#/components/schemas/WorkItem" }
+                $ref: "#/components/schemas/WorkItemList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
     post:
+      tags: [Work items]
+      operationId: createWorkItem
       summary: Create a work item
       parameters:
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeader"
+        - $ref: "#/components/parameters/ProfileHeader"
         - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/CreateWorkItem" }
+            schema:
+              $ref: "#/components/schemas/CreateWorkItem"
       responses:
         "201":
           description: Created
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/WorkItem" }
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
   /work-items/{id}:
+    parameters:
+      - $ref: "#/components/parameters/WorkItemId"
+      - $ref: "#/components/parameters/TenantHeader"
+      - $ref: "#/components/parameters/WorkspaceHeader"
     get:
+      tags: [Work items]
+      operationId: getWorkItem
       summary: Get a work item
-      parameters:
-        - $ref: "#/components/parameters/WorkItemId"
       responses:
         "200":
           description: Work item
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/WorkItem" }
+              schema:
+                $ref: "#/components/schemas/WorkItem"
         "404":
-          description: Not found in this tenant/workspace
-  /work-items/{id}/transition:
-    post:
-      summary: Apply a guarded state transition
+          $ref: "#/components/responses/NotFound"
+    patch:
+      tags: [Work items]
+      operationId: patchWorkItem
+      summary: Update title, description, or priority with optimistic versioning
       parameters:
-        - $ref: "#/components/parameters/WorkItemId"
         - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/TransitionRequest" }
+            schema:
+              $ref: "#/components/schemas/PatchWorkItem"
       responses:
         "200":
           description: Updated work item
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/WorkItem" }
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "409":
-          description: Stale version or invalid transition
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/history:
+    get:
+      tags: [Work items]
+      operationId: getWorkItemHistory
+      summary: Read the bounded in-process coordination history for a work item
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeader"
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 256
+            default: 100
+      responses:
+        "200":
+          description: Coordination events, oldest first
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /work-items/{id}/conflicts:
+    get:
+      tags: [Work items]
+      operationId: listWorkItemConflicts
+      summary: List active work items with repository or path-overlap conflicts
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+      responses:
+        "200":
+          description: Conflict warnings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictList"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /work-items/{id}/dependencies:
+    parameters:
+      - $ref: "#/components/parameters/WorkItemId"
+      - $ref: "#/components/parameters/TenantHeader"
+    get:
+      tags: [Dependencies]
+      operationId: listWorkItemDependencies
+      summary: List outgoing work-graph dependencies
+      responses:
+        "200":
+          description: Dependencies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DependencyList"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags: [Dependencies]
+      operationId: addWorkItemDependency
+      summary: Add a dependency edge
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DependencyRequest"
+      responses:
+        "201":
+          description: Created dependency
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dependency"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /work-items/{id}/dependencies/{dep}:
+    delete:
+      tags: [Dependencies]
+      operationId: removeWorkItemDependency
+      summary: Remove a dependency edge
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/DependencyId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Dependency removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /work-items/{id}/external-refs:
+    post:
+      tags: [Work items]
+      operationId: linkExternalRef
+      summary: Link a Rheovela, ONTOVELA, PR, CI, or verification reference
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExternalRefRequest"
+      responses:
+        "200":
+          description: Updated work item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/verification:
+    post:
+      tags: [Work items]
+      operationId: submitVerification
+      summary: Submit a release candidate to TEKMOVELA
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerificationRequest"
+      responses:
+        "201":
+          description: Release candidate submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerificationResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/assignments:
+    post:
+      tags: [Assignments]
+      operationId: addAssignment
+      summary: Attach another human or agent without replacing the primary lease
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignmentRequest"
+      responses:
+        "201":
+          description: Assignment added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssignmentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/assignments/{assignmentId}/release:
+    post:
+      tags: [Assignments]
+      operationId: releaseAssignment
+      summary: Release an assignment
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/AssignmentId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Assignment released
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItemResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/ready:
+    post:
+      tags: [Lifecycle]
+      operationId: markWorkItemReady
+      summary: Mark work ready after dependency checks
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Updated work item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
   /work-items/{id}/assign:
     post:
+      tags: [Lifecycle]
+      operationId: assignWorkItem
       summary: Assign an owner and acquire a lease
       parameters:
         - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
         - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/AssignRequest" }
+            schema:
+              $ref: "#/components/schemas/AssignRequest"
+      responses:
+        "201":
+          description: Assigned work item with a lease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/start:
+    post:
+      tags: [Lifecycle]
+      operationId: startWorkItem
+      summary: Start execution with the current fencing token
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
       responses:
         "200":
-          description: Assignment and lease
+          description: Updated work item
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/Assignment" }
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "409":
-          description: Lease conflict
+          $ref: "#/components/responses/Conflict"
   /work-items/{id}/progress:
     post:
-      summary: Report a progress event
+      tags: [Lifecycle]
+      operationId: reportProgress
+      summary: Report progress and extend the lease
       parameters:
         - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
         - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/ProgressEvent" }
+            schema:
+              $ref: "#/components/schemas/ProgressRequest"
       responses:
-        "202":
-          description: Accepted
-  /work-items/{id}/interventions:
-    post:
-      summary: Request a governed intervention
-      parameters:
-        - $ref: "#/components/parameters/WorkItemId"
-        - $ref: "#/components/parameters/IdempotencyKey"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: "#/components/schemas/InterventionRequest" }
-      responses:
-        "202":
-          description: Intervention accepted
+        "200":
+          description: Updated work item
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/Intervention" }
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/heartbeat:
+    post:
+      tags: [Lifecycle]
+      operationId: heartbeatWorkItem
+      summary: Extend the lease without a progress event
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
+      responses:
+        "200":
+          description: Updated work item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/interventions:
+    post:
+      tags: [Lifecycle]
+      operationId: recordIntervention
+      summary: Record a coordination intervention
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InterventionRequest"
+      responses:
+        "200":
+          description: Intervention recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /work-items/{id}/stall-check:
+    post:
+      tags: [Lifecycle]
+      operationId: checkWorkItemStall
+      summary: Evaluate staleness on demand
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Stall result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StallResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /work-items/{id}/reassign:
+    post:
+      tags: [Lifecycle]
+      operationId: reassignWorkItem
+      summary: Replace the owner and acquire a new lease
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReassignRequest"
+      responses:
+        "200":
+          description: Updated work item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/complete:
+    post:
+      tags: [Lifecycle]
+      operationId: completeWorkItem
+      summary: Complete work through configured verification, process, and reality gates
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompleteRequest"
+      responses:
+        "200":
+          description: Completed work item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItem"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/run:
+    post:
+      tags: [Lifecycle]
+      operationId: startWorkItemRun
+      summary: Start a runtime adapter run for assigned or executing work
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunRequest"
+      responses:
+        "201":
+          description: Run started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RunResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /work-items/{id}/cancel-run:
+    post:
+      tags: [Lifecycle]
+      operationId: cancelWorkItemRun
+      summary: Cancel the active runtime run
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Run cancelled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
   /schedules:
     get:
-      summary: List schedules
+      tags: [Schedules]
+      operationId: listSchedules
+      summary: List schedules in the current tenant/workspace
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
       responses:
         "200":
           description: Schedules
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  schedules:
-                    type: array
-                    items: { $ref: "#/components/schemas/Schedule" }
+                $ref: "#/components/schemas/ScheduleList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
     post:
-      summary: Define a schedule (execution belongs to PRAXOVELA)
+      tags: [Schedules]
+      operationId: saveSchedule
+      summary: Define a schedule; execution belongs to PRAXOVELA
       parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/ProfileHeader"
         - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/Schedule" }
+            schema:
+              $ref: "#/components/schemas/ScheduleRequest"
       responses:
         "201":
-          description: Created
+          description: Created schedule
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/Schedule" }
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /schedules/run-due:
+    post:
+      tags: [Schedules]
+      operationId: runDueSchedules
+      summary: Claim due schedules and emit triggers
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunDueRequest"
+      responses:
+        "200":
+          description: Claimed schedules
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TriggeredSchedules"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /schedules/run-event:
+    post:
+      tags: [Schedules]
+      operationId: runEventSchedules
+      summary: Claim event schedules for an event type
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunEventRequest"
+      responses:
+        "200":
+          description: Claimed schedules
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TriggeredSchedules"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /schedules/{id}/complete:
+    post:
+      tags: [Schedules]
+      operationId: completeSchedule
+      summary: Compute the next run, release the lease, and disable one-shot schedules
+      parameters:
+        - $ref: "#/components/parameters/ScheduleId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Updated schedule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /schedules/{id}/release:
+    post:
+      tags: [Schedules]
+      operationId: releaseSchedule
+      summary: Release a schedule lease after a failed dispatch
+      parameters:
+        - $ref: "#/components/parameters/ScheduleId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Schedule released
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /schedules/{id}/toggle:
+    post:
+      tags: [Schedules]
+      operationId: toggleSchedule
+      summary: Enable or disable a schedule
+      parameters:
+        - $ref: "#/components/parameters/ScheduleId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleScheduleRequest"
+      responses:
+        "200":
+          description: Updated schedule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /schedules/{id}/trigger:
+    post:
+      tags: [Schedules]
+      operationId: triggerSchedule
+      summary: Trigger a schedule manually
+      parameters:
+        - $ref: "#/components/parameters/ScheduleId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Triggered schedule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+  /schedules/{id}:
+    delete:
+      tags: [Schedules]
+      operationId: deleteSchedule
+      summary: Remove a schedule
+      parameters:
+        - $ref: "#/components/parameters/ScheduleId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      responses:
+        "200":
+          description: Schedule deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /projections/my-work:
+    get:
+      tags: [Projections]
+      operationId: getMyWorkProjection
+      summary: Read the current principal's active work queue
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/PrincipalHeaderRequired"
+      responses:
+        "200":
+          description: Work items owned by or assigned to the principal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItemList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /projections/attention:
+    get:
+      tags: [Projections]
+      operationId: getAttentionProjection
+      summary: Read blocked, review, or stalled work
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      responses:
+        "200":
+          description: Attention work items
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItemList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /projections/programs/{id}:
+    get:
+      tags: [Projections]
+      operationId: getProgramProjection
+      summary: Read program work items and state counts
+      parameters:
+        - $ref: "#/components/parameters/ProgramId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      responses:
+        "200":
+          description: Program projection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgramProjection"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /projections/work-items/{id}:
+    get:
+      tags: [Projections]
+      operationId: getWorkItemProjection
+      summary: Read one work item with its outgoing dependencies
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      responses:
+        "200":
+          description: Work-item projection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItemProjection"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /events:
+    get:
+      tags: [Events]
+      operationId: streamCoordinationEvents
+      summary: Stream tenant/workspace-scoped coordination events over SSE
+      parameters:
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/LastEventID"
+      responses:
+        "200":
+          description: |
+            Server-sent events. Each frame has an `id`, an `event` name, and a
+            JSON `data` payload. The stream sends keep-alive comments. Replay is
+            a bounded in-memory window; durable replay is Harmovela-owned.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          description: Requested replay ID is outside the retained window
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Too many concurrent SSE subscribers in this process
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds before retrying
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /healthz:
+    servers:
+      - url: http://localhost:1976
+    get:
+      tags: [Operations]
+      operationId: getHealth
+      summary: Process liveness and version
+      responses:
+        "200":
+          description: Liveness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+  /readyz:
+    servers:
+      - url: http://localhost:1976
+    get:
+      tags: [Operations]
+      operationId: getReadiness
+      summary: PostgreSQL and dependency readiness
+      responses:
+        "200":
+          description: Ready
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadyResponse"
+        "503":
+          description: Degraded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadyResponse"
+  /metrics:
+    servers:
+      - url: http://localhost:1976
+    get:
+      tags: [Operations]
+      operationId: getMetrics
+      summary: Prometheus metrics
+      responses:
+        "200":
+          description: Prometheus text exposition format
+          content:
+            text/plain:
+              schema:
+                type: string
 components:
-  securitySchemes:
-    TrustedContext:
-      type: apiKey
-      in: header
-      name: X-Axis-Principal
   parameters:
+    TenantHeader:
+      name: X-Axis-Tenant
+      in: header
+      required: true
+      description: Trusted tenant scope supplied by the gateway.
+      schema:
+        type: string
+    TenantHeaderRequired:
+      name: X-Axis-Tenant
+      in: header
+      required: true
+      description: Trusted tenant scope supplied by the gateway.
+      schema:
+        type: string
+    WorkspaceHeader:
+      name: X-Axis-Workspace
+      in: header
+      required: false
+      description: Trusted workspace scope. Required by projections, events, and schedules.
+      schema:
+        type: string
+    WorkspaceHeaderRequired:
+      name: X-Axis-Workspace
+      in: header
+      required: true
+      description: Trusted workspace scope supplied by the gateway.
+      schema:
+        type: string
+    PrincipalHeaderRequired:
+      name: X-Axis-Principal
+      in: header
+      required: true
+      description: Trusted principal identity supplied by the gateway.
+      schema:
+        type: string
+    ProfileHeader:
+      name: X-Axis-Profile
+      in: header
+      required: false
+      description: Optional scenario profile id/version fallback.
+      schema:
+        type: string
     IdempotencyKey:
       name: Idempotency-Key
       in: header
       required: true
-      schema: { type: string }
+      description: Stable key for this logical mutation. Required on every mutating /v1 route.
+      schema:
+        type: string
+    AegivelaAssertion:
+      name: X-Aegivela-Workload-Assertion
+      in: header
+      required: false
+      description: Required when AEGIVELA system_api authorization is enabled.
+      schema:
+        type: string
+    LastEventID:
+      name: Last-Event-ID
+      in: header
+      required: false
+      description: Replay after this stream event id. Outside the retained window returns 409.
+      schema:
+        type: integer
+        format: uint64
     WorkItemId:
       name: id
       in: path
       required: true
-      schema: { type: string }
+      schema:
+        type: string
+    ScheduleId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    AssignmentId:
+      name: assignmentId
+      in: path
+      required: true
+      schema:
+        type: string
+    DependencyId:
+      name: dep
+      in: path
+      required: true
+      description: The depends-on work item id to remove.
+      schema:
+        type: string
+    ProgramId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request or missing trusted context/header
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Unauthorized:
+      description: Authorization enabled and the workload assertion is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Forbidden:
+      description: Authorization denied, or the operation requires an authorized caller
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    NotFound:
+      description: Not found in this tenant/workspace
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Conflict:
+      description: Stale version, lease conflict, invalid transition, or in-progress idempotency key
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    ServiceUnavailable:
+      description: Required dependency or authorization service is unavailable
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
   schemas:
     WorkItem:
       type: object
       required: [id, tenantId, workspaceId, title, state, version]
       properties:
-        id: { type: string }
-        tenantId: { type: string }
-        workspaceId: { type: string }
-        programId: { type: string }
-        milestoneId: { type: string }
-        title: { type: string }
-        description: { type: string }
-        state:
+        id:
           type: string
-          enum: [proposed, ready, assigned, executing, blocked, review, verifying, done, failed, cancelled]
-        priority: { type: integer }
-        ownerKind: { type: string }
-        ownerRef: { type: string }
-        version: { type: integer, format: int64 }
-        createdAt: { type: string, format: date-time }
-        updatedAt: { type: string, format: date-time }
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        profile:
+          type: string
+        repository:
+          type: string
+        paths:
+          type: array
+          items:
+            type: string
+        programId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        state:
+          $ref: "#/components/schemas/WorkItemState"
+        priority:
+          type: integer
+        ownerKind:
+          type: string
+          enum: [human, agent, team]
+        ownerRef:
+          type: string
+        leaseId:
+          type: string
+        lease:
+          $ref: "#/components/schemas/Lease"
+        runtime:
+          $ref: "#/components/schemas/RuntimeRef"
+        externalRefs:
+          type: object
+          additionalProperties:
+            type: string
+        assignments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Assignment"
+        verificationRef:
+          type: string
+        version:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    WorkItemState:
+      type: string
+      enum: [proposed, ready, assigned, executing, blocked, review, verifying, done, failed, cancelled]
+    Lease:
+      type: object
+      properties:
+        id:
+          type: string
+        workItemId:
+          type: string
+        ownerRef:
+          type: string
+        fencingToken:
+          type: integer
+          format: int64
+        acquiredAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        heartbeatAt:
+          type: string
+          format: date-time
+        releasedAt:
+          type: string
+          format: date-time
+    RuntimeRef:
+      type: object
+      required: [adapter, runId, correlationId]
+      properties:
+        adapter:
+          type: string
+        runId:
+          type: string
+        agentId:
+          type: string
+        sessionId:
+          type: string
+        correlationId:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+    Assignment:
+      type: object
+      properties:
+        id:
+          type: string
+        workItemId:
+          type: string
+        assigneeKind:
+          type: string
+          enum: [human, agent, team]
+        assigneeRef:
+          type: string
+        assignedBy:
+          type: string
+        assignedAt:
+          type: string
+          format: date-time
+        releasedAt:
+          type: string
+          format: date-time
+        reason:
+          type: string
+    Dependency:
+      type: object
+      required: [workItemId, dependsOnId, kind]
+      properties:
+        workItemId:
+          type: string
+        dependsOnId:
+          type: string
+        kind:
+          type: string
+          enum: [blocks, relates, release]
+    Schedule:
+      type: object
+      required: [id, tenantId, workspaceId, kind, enabled]
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        profile:
+          type: string
+        workItemId:
+          type: string
+        kind:
+          type: string
+          enum: [cron, interval, once, event]
+        expression:
+          type: string
+        eventType:
+          type: string
+        timezone:
+          type: string
+        misfirePolicy:
+          type: string
+          enum: [skip, catch_up, run_once]
+        enabled:
+          type: boolean
+        nextRun:
+          type: string
+          format: date-time
+        lastRun:
+          type: string
+          format: date-time
+        leaseUntil:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
     CreateWorkItem:
       type: object
       required: [id, title]
       properties:
-        id: { type: string }
-        programId: { type: string }
-        milestoneId: { type: string }
-        title: { type: string }
-        description: { type: string }
-        priority: { type: integer }
-        stallAfter: { type: string, example: "20m" }
-        acceptance:
-          type: array
-          items: { type: string }
-    TransitionRequest:
-      type: object
-      required: [to, expectedVersion]
-      properties:
-        to:
+        id:
           type: string
-          enum: [ready, assigned, executing, blocked, review, verifying, done, failed, cancelled]
-        expectedVersion: { type: integer, format: int64 }
-        reason: { type: string }
+        title:
+          type: string
+        profile:
+          type: string
+        repository:
+          type: string
+        paths:
+          type: array
+          items:
+            type: string
+        programId:
+          type: string
+        description:
+          type: string
+        priority:
+          type: integer
+    PatchWorkItem:
+      type: object
+      required: [expectedVersion]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        priority:
+          type: integer
+        expectedVersion:
+          type: integer
+          format: int64
+    DependencyRequest:
+      type: object
+      required: [dependsOnId]
+      properties:
+        dependsOnId:
+          type: string
+        kind:
+          type: string
+          enum: [blocks, relates, release]
+          default: blocks
+    ExternalRefRequest:
+      type: object
+      required: [system, ref]
+      properties:
+        system:
+          type: string
+          description: "Reference system, for example rheovela, ontovela, tekmovela, pr, or ci."
+        ref:
+          type: string
+        fencingToken:
+          type: integer
+          format: int64
+    VerificationRequest:
+      type: object
+      properties:
+        resultRef:
+          type: string
+        submissionRef:
+          type: string
+    AssignmentRequest:
+      type: object
+      required: [assigneeRef]
+      properties:
+        assigneeKind:
+          type: string
+          enum: [human, agent, team]
+          default: agent
+        assigneeRef:
+          type: string
+        assignedBy:
+          type: string
+        reason:
+          type: string
     AssignRequest:
       type: object
-      required: [assigneeKind, assigneeRef, leaseSeconds, expectedVersion]
+      required: [ownerKind, ownerRef, expectedVersion]
       properties:
-        assigneeKind: { type: string, enum: [human, agent, team] }
-        assigneeRef: { type: string }
-        leaseSeconds: { type: integer }
-        expectedVersion: { type: integer, format: int64 }
-    Assignment:
+        ownerKind:
+          type: string
+          enum: [human, agent, team]
+        ownerRef:
+          type: string
+        expectedVersion:
+          type: integer
+          format: int64
+    TokenRequest:
       type: object
+      required: [fencingToken]
       properties:
-        assignmentId: { type: string }
-        workItemId: { type: string }
-        leaseId: { type: string }
-        fencingToken: { type: integer, format: int64 }
-        expiresAt: { type: string, format: date-time }
-    ProgressEvent:
+        fencingToken:
+          type: integer
+          format: int64
+    ProgressRequest:
       type: object
-      required: [source, kind]
+      required: [fencingToken, kind]
       properties:
-        source: { type: string, enum: [agent, human, rheovela, ci] }
-        kind: { type: string, enum: [heartbeat, step, commit, test, review] }
-        payload:
-          type: object
-          additionalProperties: true
-        occurredAt: { type: string, format: date-time }
+        fencingToken:
+          type: integer
+          format: int64
+        kind:
+          type: string
+          description: Progress signal kind, for example heartbeat, step, commit, test, or review.
     InterventionRequest:
       type: object
-      required: [action, reason]
+      required: [action]
       properties:
-        policyId: { type: string }
-        action: { type: string, enum: [nudge, retry, reassign, escalate, pause, cancel] }
-        reason: { type: string }
-    Intervention:
+        action:
+          type: string
+          enum: [nudge, retry, reassign, escalate, pause, cancel]
+        reason:
+          type: string
+    ReassignRequest:
+      type: object
+      required: [ownerKind, ownerRef, fencingToken]
+      properties:
+        ownerKind:
+          type: string
+          enum: [human, agent, team]
+        ownerRef:
+          type: string
+        fencingToken:
+          type: integer
+          format: int64
+        authorized:
+          type: boolean
+          description: Caller authorization flag. With AEGIVELA enabled, authorization is enforced by the adapter.
+    CompleteRequest:
+      type: object
+      required: [fencingToken]
+      properties:
+        fencingToken:
+          type: integer
+          format: int64
+        resultRef:
+          type: string
+        submissionRef:
+          type: string
+        verificationRef:
+          type: string
+    RunRequest:
+      type: object
+      required: [adapterName, fencingToken]
+      properties:
+        adapterName:
+          type: string
+        workspace:
+          type: string
+        prompt:
+          type: string
+        model:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        fencingToken:
+          type: integer
+          format: int64
+    ScheduleRequest:
+      type: object
+      required: [id, kind]
+      properties:
+        id:
+          type: string
+        profile:
+          type: string
+        workItemId:
+          type: string
+        kind:
+          type: string
+          enum: [cron, interval, once, event]
+        expression:
+          type: string
+          description: Cron, interval, or once expression. Not used for event schedules.
+        eventType:
+          type: string
+        timezone:
+          type: string
+        misfirePolicy:
+          type: string
+          enum: [skip, catch_up, run_once]
+        enabled:
+          type: boolean
+    ToggleScheduleRequest:
+      type: object
+      required: [enabled]
+      properties:
+        enabled:
+          type: boolean
+    RunDueRequest:
       type: object
       properties:
-        id: { type: string }
-        workItemId: { type: string }
-        action: { type: string }
-        outcome: { type: string }
-        authorizationRef: { type: string }
-        createdAt: { type: string, format: date-time }
-    Schedule:
+        limit:
+          type: integer
+          minimum: 1
+    RunEventRequest:
       type: object
-      required: [id, kind, expression]
+      required: [eventType]
       properties:
-        id: { type: string }
-        workItemId: { type: string }
-        kind: { type: string, enum: [cron, interval, once, event] }
-        expression: { type: string }
-        timezone: { type: string }
-        misfirePolicy: { type: string, enum: [skip, catch_up, run_once] }
-        enabled: { type: boolean }
-        nextRun: { type: string, format: date-time }
+        eventType:
+          type: string
+    WorkItemList:
+      type: object
+      required: [workItems]
+      properties:
+        workItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkItem"
+    DependencyList:
+      type: object
+      required: [dependencies]
+      properties:
+        dependencies:
+          type: array
+          items:
+            $ref: "#/components/schemas/Dependency"
+    ConflictList:
+      type: object
+      required: [conflicts]
+      properties:
+        conflicts:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkItem"
+    HistoryResponse:
+      type: object
+      required: [events]
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/StreamEvent"
+    AssignmentResponse:
+      type: object
+      required: [workItem]
+      properties:
+        workItem:
+          $ref: "#/components/schemas/WorkItem"
+        conflicts:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkItem"
+    WorkItemResponse:
+      type: object
+      required: [workItem]
+      properties:
+        workItem:
+          $ref: "#/components/schemas/WorkItem"
+    VerificationResponse:
+      type: object
+      required: [releaseCandidateRef]
+      properties:
+        releaseCandidateRef:
+          type: string
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+    StallResponse:
+      type: object
+      required: [stalled]
+      properties:
+        stalled:
+          type: boolean
+    RunResponse:
+      type: object
+      required: [runId]
+      properties:
+        runId:
+          type: string
+    ScheduleList:
+      type: object
+      required: [schedules]
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: "#/components/schemas/Schedule"
+    TriggeredSchedules:
+      type: object
+      required: [triggered]
+      properties:
+        triggered:
+          type: array
+          items:
+            $ref: "#/components/schemas/Schedule"
+    ProgramProjection:
+      type: object
+      required: [workItems, states]
+      properties:
+        workItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkItem"
+        states:
+          type: object
+          additionalProperties:
+            type: integer
+    WorkItemProjection:
+      type: object
+      required: [workItem, dependencies]
+      properties:
+        workItem:
+          $ref: "#/components/schemas/WorkItem"
+        dependencies:
+          type: array
+          items:
+            $ref: "#/components/schemas/Dependency"
+    StreamEvent:
+      type: object
+      required: [id, type, tenantId, workItemId, at]
+      properties:
+        id:
+          type: integer
+          format: uint64
+        type:
+          type: string
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        profile:
+          type: string
+        workItemId:
+          type: string
+        at:
+          type: string
+          format: date-time
+        data:
+          type: object
+          additionalProperties: true
+    HealthResponse:
+      type: object
+      required: [status, version]
+      properties:
+        status:
+          type: string
+        version:
+          type: string
+        consumer:
+          type: object
+          additionalProperties: true
+    ReadyResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ready, degraded]
+        error:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string

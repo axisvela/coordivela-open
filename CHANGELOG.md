@@ -11,6 +11,14 @@ All notable changes to COORDIVELA Open are documented here.
 - Added English and Chinese operations manuals covering installation,
   configuration, PostgreSQL setup, startup, health checks, backups, upgrades,
   monitoring, and troubleshooting.
+- Completed the OpenAPI contract for all published `/v1` routes and set the
+  contract revision to `1.0.0`.
+
+### Fixed
+
+- The Go SDK now sends `Idempotency-Key` on work-item creation and exposes
+  `CreateWorkItemWithKey` for caller-controlled retry keys.
+- Quickstart requests now include the required `Idempotency-Key` header.
 
 ## [1.0.0] - 2026-10-20
 

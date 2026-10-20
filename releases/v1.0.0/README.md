@@ -45,5 +45,5 @@ sha256sum -c SHA256SUMS
   product. Core ships stall reconciliation and timer-signal ingestion but does
   not claim PRAXOVELA timer durability.
 - `RuntimeAdapter` v1 is not part of this release.
-- The OpenAPI contract in this repository remains revision `0.1.0`; the `/v1`
-  runtime surface is version `1.0.0`.
+- This release ships OpenAPI contract revision `0.1.0`. The contract was
+  completed to revision `1.0.0` after the release on `main`.
