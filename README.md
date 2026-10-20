@@ -88,9 +88,12 @@ license-enforced counter.
 ## What Is In This Repository
 
 - `contracts/openapi/coordivela.v1.yaml` - public HTTP contract.
+- `contracts/runtime-adapter/v1/` - RuntimeAdapter v1 semantics and JSON Schema.
 - `sdk/go/` - Go SDK covering work items, dependencies, lifecycle, schedules,
-  projections, and SSE.
+  projections, SSE, and the RuntimeAdapter v1 contract/conformance kit.
 - `examples/quickstart/` - end-to-end API example.
+- `examples/runtime-adapter/` - external RuntimeAdapter v1 example that passes
+  the public conformance kit.
 - [`docs/OPERATIONS.md`](docs/OPERATIONS.md) - installation, configuration,
   PostgreSQL, backup, upgrade, monitoring, and troubleshooting.
 - `releases/` - approved binaries, manifests, checksums, license notices, and
@@ -106,9 +109,13 @@ Known limitations:
 
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
-- `RuntimeAdapter` v1 publication remains deferred by decision.
 
 The OpenAPI contract is revision `1.0.0` and covers the published `/v1` routes.
+
+On `main`, the RuntimeAdapter v1 contract, Go interface, JSON Schema, and
+conformance kit are published under `contracts/runtime-adapter/v1/`,
+`sdk/go/adapter/`, and `sdk/go/adapter/conformance/`. These are not part of the
+`v1.0.0` release artifact until a new tag is cut.
 
 See the [core roadmap](https://github.com/axisvela/coordivela/blob/main/ROADMAP.md)
 for post-1.0 sequencing.
