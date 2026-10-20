@@ -2,6 +2,13 @@
 
 All notable changes to COORDIVELA Open are documented here.
 
+## [Unreleased]
+
+### Added
+
+- Work-item conflict override routes and SDK methods
+  (`POST/DELETE /work-items/{id}/conflict-override`).
+
 ## [1.2.0] - 2026-10-20
 
 ### Added
@@ -17,8 +24,6 @@ All notable changes to COORDIVELA Open are documented here.
 - Projection and SSE usage examples in the quickstart.
 - `GET /projections/symbivela-attention` and a matching Go SDK method for
   read-only SYMBIVELA attention.
-- Work-item conflict override routes and SDK methods
-  (`POST/DELETE /work-items/{id}/conflict-override`).
 
 ### Changed
 
