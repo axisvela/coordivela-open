@@ -11,6 +11,8 @@ All notable changes to COORDIVELA Open are documented here.
 - Resource-scoped collaborator lease routes and SDK methods
   (`GET/POST /work-items/{id}/leases`, `DELETE /work-items/{id}/leases/{leaseId}`),
   including optional `canComplete` completion grants.
+- Approved 1.3.0 core binaries for windows/amd64, linux/amd64, and darwin/arm64,
+  with checksums, CycloneDX SBOMs, and GPG signatures under `releases/v1.3.0/`.
 
 ## [1.2.0] - 2026-10-20
 
