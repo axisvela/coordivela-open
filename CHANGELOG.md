@@ -2,7 +2,7 @@
 
 All notable changes to COORDIVELA Open are documented here.
 
-## [Unreleased]
+## [1.2.0] - 2026-10-20
 
 ### Added
 
