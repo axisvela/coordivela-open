@@ -1,0 +1,132 @@
+{
+    "version":  "1.3.0",
+    "tag":  "v1.3.0",
+    "released":  "2026-10-20",
+    "source":  {
+                   "repository":  "https://github.com/axisvela/coordivela",
+                   "commit":  "9db1aa040a2b8b35a6796374d4ad284565b24f12",
+                   "tag":  "v1.3.0"
+               },
+    "license":  "AGPL-3.0",
+    "build":  {
+                  "go":  "go1.26.9",
+                  "cgo":  "disabled",
+                  "trimpath":  true
+              },
+    "contract":  {
+                     "path":  "contracts/openapi/coordivela.v1.yaml",
+                     "revision":  "1.3.0"
+                 },
+    "sbom":  [
+                 "sbom/coordivela-backend.cdx.json",
+                 "sbom/coordivela-frontend.cdx.json"
+             ],
+    "linked_sources":  {
+                           "harmovela":  "75accf5dddb6a84e1fe5fc90b8b7b701f941fa00",
+                           "symbivela-open":  "7b858ee13c9292908c86b3ec0af2c7124c0d2ccc",
+                           "mnemovela-open":  "b141f6a2e93cc6307417d59c398b92c28baf4dff",
+                           "gnosivela-open":  "f48e5c568d1bf8a84f31438631e08e44e2c7da1f",
+                           "tekmovela-open":  "2a10aec8afa243fc6f0578b96ae41ddff23ba67f"
+                       },
+    "platforms":  {
+                      "darwin-arm64":  {
+                                           "directory":  "darwin-arm64",
+                                           "artifacts":  [
+                                                             {
+                                                                 "name":  "coordivela",
+                                                                 "sha256":  "daaddd64daf431c7e7ed39a9c8eae17d1bc83879b2ea4593174c7f3f38479371",
+                                                                 "size":  22513794
+                                                             },
+                                                             {
+                                                                 "name":  "coordivela-migrate",
+                                                                 "sha256":  "9841bf7dfb714eb874eb21709fb0c3b3ca29e2cb62fb797512ee3d5922cab1ab",
+                                                                 "size":  9150482
+                                                             },
+                                                             {
+                                                                 "name":  "coordivela-opencode-probe",
+                                                                 "sha256":  "05d31419d4b2cb91df98ee7b0fb0aab0e15499133ef531e1a2b09ea98ab3d401",
+                                                                 "size":  20969570
+                                                             },
+                                                             {
+                                                                 "name":  "LICENSE-COORDIVELA-CORE.txt",
+                                                                 "sha256":  "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+                                                                 "size":  34523
+                                                             },
+                                                             {
+                                                                 "name":  "NOTICE",
+                                                                 "sha256":  "ffbdf53c42477b09746322a46ca96f9040435e6105ca947bb026763f610aa22a",
+                                                                 "size":  907
+                                                             }
+                                                         ]
+                                       },
+                      "linux-amd64":  {
+                                          "directory":  "linux-amd64",
+                                          "artifacts":  [
+                                                            {
+                                                                "name":  "coordivela",
+                                                                "sha256":  "2c31d44517a10f07d0fe93eddce10701aedcfa7bb08f232edd39652fd670fc45",
+                                                                "size":  22978722
+                                                            },
+                                                            {
+                                                                "name":  "coordivela-migrate",
+                                                                "sha256":  "27bb604534cc0af23ce42a4cb203b0e6665bf00ae6d930dc4002cda74eb6874b",
+                                                                "size":  9461922
+                                                            },
+                                                            {
+                                                                "name":  "coordivela-opencode-probe",
+                                                                "sha256":  "8c51d3437af1970b5f7bb3acaa0cc9dc8b1204f2ab2ca7946a9a2949307f1a65",
+                                                                "size":  21352610
+                                                            },
+                                                            {
+                                                                "name":  "LICENSE-COORDIVELA-CORE.txt",
+                                                                "sha256":  "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+                                                                "size":  34523
+                                                            },
+                                                            {
+                                                                "name":  "NOTICE",
+                                                                "sha256":  "433e9c95045096dd8eed21ec247a2e098b684b444181070aa054908c060805fc",
+                                                                "size":  906
+                                                            }
+                                                        ]
+                                      },
+                      "windows-amd64":  {
+                                            "directory":  "windows-amd64",
+                                            "artifacts":  [
+                                                              {
+                                                                  "name":  "coordivela.exe",
+                                                                  "sha256":  "ea1106d25da8f4c7fd7fd90b3ff32b77211bd0c047a2d646d9c50d56a5dde950",
+                                                                  "size":  23618048
+                                                              },
+                                                              {
+                                                                  "name":  "coordivela-migrate.exe",
+                                                                  "sha256":  "e582fa07130e9d891bc976f3f65f9b90dcca3f22f835e71f3201965aae004a12",
+                                                                  "size":  9781760
+                                                              },
+                                                              {
+                                                                  "name":  "coordivela-opencode-probe.exe",
+                                                                  "sha256":  "ae53dc2604eefd97a65dda486cf82a4183f98bbe0d9f92bd95fd3e5e4a3ee9f0",
+                                                                  "size":  21945856
+                                                              },
+                                                              {
+                                                                  "name":  "LICENSE-COORDIVELA-CORE.txt",
+                                                                  "sha256":  "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+                                                                  "size":  34523
+                                                              },
+                                                              {
+                                                                  "name":  "NOTICE",
+                                                                  "sha256":  "5782db09fa1e78ecaf44e09c9b0c280a407e77ff3c4180d28ed0ec8d9f0e0c7a",
+                                                                  "size":  920
+                                                              }
+                                                          ]
+                                        }
+                  },
+    "signing_key":  "COORDIVELA-RELEASE-SIGNING-KEY.asc",
+    "signatures":  [
+                       "manifest.json.asc",
+                       "sbom/coordivela-backend.cdx.json.asc",
+                       "sbom/coordivela-frontend.cdx.json.asc",
+                       "windows-amd64/SHA256SUMS.asc",
+                       "linux-amd64/SHA256SUMS.asc",
+                       "darwin-arm64/SHA256SUMS.asc"
+                   ]
+}
