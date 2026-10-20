@@ -38,28 +38,29 @@ func New(baseURL, tenant, workspace string) *Client {
 
 // WorkItem is one coordinated unit of development work.
 type WorkItem struct {
-	ID              string            `json:"id"`
-	TenantID        string            `json:"tenantId"`
-	WorkspaceID     string            `json:"workspaceId"`
-	Profile         string            `json:"profile,omitempty"`
-	Repository      string            `json:"repository,omitempty"`
-	Paths           []string          `json:"paths,omitempty"`
-	ProgramID       string            `json:"programId,omitempty"`
-	Title           string            `json:"title"`
-	Description     string            `json:"description,omitempty"`
-	State           string            `json:"state"`
-	Priority        int               `json:"priority,omitempty"`
-	OwnerKind       string            `json:"ownerKind,omitempty"`
-	OwnerRef        string            `json:"ownerRef,omitempty"`
-	LeaseID         string            `json:"leaseId,omitempty"`
-	Lease           *Lease            `json:"lease,omitempty"`
-	Runtime         *RuntimeRef       `json:"runtime,omitempty"`
-	ExternalRefs    map[string]string `json:"externalRefs,omitempty"`
-	Assignments     []Assignment      `json:"assignments,omitempty"`
-	VerificationRef string            `json:"verificationRef,omitempty"`
-	Version         int64             `json:"version"`
-	CreatedAt       string            `json:"createdAt,omitempty"`
-	UpdatedAt       string            `json:"updatedAt,omitempty"`
+	ID               string            `json:"id"`
+	TenantID         string            `json:"tenantId"`
+	WorkspaceID      string            `json:"workspaceId"`
+	Profile          string            `json:"profile,omitempty"`
+	Repository       string            `json:"repository,omitempty"`
+	Paths            []string          `json:"paths,omitempty"`
+	ProgramID        string            `json:"programId,omitempty"`
+	Title            string            `json:"title"`
+	Description      string            `json:"description,omitempty"`
+	State            string            `json:"state"`
+	Priority         int               `json:"priority,omitempty"`
+	OwnerKind        string            `json:"ownerKind,omitempty"`
+	OwnerRef         string            `json:"ownerRef,omitempty"`
+	LeaseID          string            `json:"leaseId,omitempty"`
+	Lease            *Lease            `json:"lease,omitempty"`
+	Runtime          *RuntimeRef       `json:"runtime,omitempty"`
+	ExternalRefs     map[string]string `json:"externalRefs,omitempty"`
+	Assignments      []Assignment      `json:"assignments,omitempty"`
+	ConflictOverride *ConflictOverride `json:"conflictOverride,omitempty"`
+	VerificationRef  string            `json:"verificationRef,omitempty"`
+	Version          int64             `json:"version"`
+	CreatedAt        string            `json:"createdAt,omitempty"`
+	UpdatedAt        string            `json:"updatedAt,omitempty"`
 }
 
 // Lease is a fencing-token lease held by a work-item owner.
@@ -480,6 +481,29 @@ func (c *Client) Assign(ctx context.Context, id string, req AssignRequest) (*Wor
 	return &out, nil
 }
 
+// OverrideConflicts records an authorized path-conflict override.
+func (c *Client) OverrideConflicts(ctx context.Context, id string, req ConflictOverrideRequest) (*WorkItem, error) {
+	var out WorkItem
+	if err := c.do(ctx, http.MethodPost, "/v1/work-items/"+pathEscape(id)+"/conflict-override", req, &out, req.IdempotencyKey); err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ClearConflictOverride removes a path-conflict override.
+func (c *Client) ClearConflictOverride(ctx context.Context, id string, expectedVersion int64, idempotencyKey ...string) (*WorkItem, error) {
+	var out WorkItem
+	path := "/v1/work-items/" + pathEscape(id) + "/conflict-override?expectedVersion=" + strconv.FormatInt(expectedVersion, 10)
+	key := ""
+	if len(idempotencyKey) > 0 {
+		key = idempotencyKey[0]
+	}
+	if err := c.do(ctx, http.MethodDelete, path, nil, &out, key); err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // Start starts execution with a fencing token.
 func (c *Client) Start(ctx context.Context, id string, fencingToken int64) (*WorkItem, error) {
 	return c.lifecycle(ctx, id, "start", TokenRequest{FencingToken: fencingToken})
@@ -763,4 +787,20 @@ func newIdempotencyKey() string {
 		return fmt.Sprintf("sdk-%d", time.Now().UnixNano())
 	}
 	return fmt.Sprintf("sdk-%x", raw)
+}
+
+// ConflictOverrideRequest records an authorized path-conflict override.
+type ConflictOverrideRequest struct {
+	Reason          string `json:"reason"`
+	TTLSeconds      int    `json:"ttlSeconds,omitempty"`
+	ExpectedVersion int64  `json:"expectedVersion"`
+	IdempotencyKey  string `json:"-"`
+}
+
+// ConflictOverride records an active path-conflict override.
+type ConflictOverride struct {
+	Reason    string `json:"reason"`
+	ActorRef  string `json:"actorRef"`
+	CreatedAt string `json:"createdAt"`
+	ExpiresAt string `json:"expiresAt,omitempty"`
 }
