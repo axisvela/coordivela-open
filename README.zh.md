@@ -79,6 +79,8 @@ Core 和 Open 共享版本线；EE 独立发布，并声明其支持的 core 版
 - `contracts/openapi/coordivela.v1.yaml` - 公开 HTTP 合同。
 - `sdk/go/` - Go SDK。
 - `examples/quickstart/` - 端到端 API 示例。
+- [`docs/OPERATIONS.zh.md`](docs/OPERATIONS.zh.md) - 安装、配置、PostgreSQL、
+  备份、升级、监控和故障排查操作手册。
 - `releases/` - 经批准的二进制、清单、校验和、许可证声明和 CycloneDX SBOM。
 
 ## 当前版本

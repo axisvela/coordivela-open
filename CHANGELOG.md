@@ -8,6 +8,9 @@ All notable changes to COORDIVELA Open are documented here.
 
 - Expanded the English and Chinese READMEs with COORDIVELA positioning, the
   problem it solves, its value, and the Core/Open/EE boundaries.
+- Added English and Chinese operations manuals covering installation,
+  configuration, PostgreSQL setup, startup, health checks, backups, upgrades,
+  monitoring, and troubleshooting.
 
 ## [1.0.0] - 2026-10-20
 
