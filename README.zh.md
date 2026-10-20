@@ -93,8 +93,8 @@ darwin/arm64。
 
 - PRAXOVELA 的持久执行计时器证据仍由该产品负责。
 - `RuntimeAdapter` v1 的发布仍按决定延期。
-- OpenAPI 合同仍为 revision `0.1.0`；补齐完整 `/v1` 合同是 post-1.0 的第一
-  项路线图工作。
+
+OpenAPI 合同为 revision `1.0.0`，覆盖已发布的 `/v1` 路由。
 
 post-1.0 的排期见 [core 路线图](https://github.com/axisvela/coordivela/blob/main/ROADMAP.md)。
 
@@ -110,9 +110,10 @@ docker compose -f deploy/compose.yaml up --build
 创建工作项并列出：
 
 ```bash
-curl -s http://localhost:1976/v1/work-items \
+curl -s -X POST http://localhost:1976/v1/work-items \
   -H 'X-Axis-Tenant: local' \
   -H 'X-Axis-Workspace: default' \
+  -H 'Idempotency-Key: quickstart-wi-1' \
   -H 'Content-Type: application/json' \
   -d '{"id":"wi-1","title":"Implement durable scheduler persistence"}'
 
@@ -136,7 +137,8 @@ curl -s http://localhost:1976/v1/work-items \
 ## 合同
 
 OpenAPI 合同是公开 HTTP 面的唯一事实源。SDK 必须按合同生成或校验。破坏性变更
-需要提升合同主版本。合同 revision 与运行时/二进制版本线独立演进。
+需要提升合同主版本。当前合同 revision 为 `1.0.0`，与运行时/二进制版本线独立
+演进。
 
 ## 许可证
 

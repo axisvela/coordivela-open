@@ -106,8 +106,8 @@ Known limitations:
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
 - `RuntimeAdapter` v1 publication remains deferred by decision.
-- The OpenAPI contract remains revision `0.1.0`; completing the contract for
-  the full `/v1` surface is the first post-1.0 roadmap item.
+
+The OpenAPI contract is revision `1.0.0` and covers the published `/v1` routes.
 
 See the [core roadmap](https://github.com/axisvela/coordivela/blob/main/ROADMAP.md)
 for post-1.0 sequencing.
@@ -124,9 +124,10 @@ docker compose -f deploy/compose.yaml up --build
 Create and list a work item:
 
 ```bash
-curl -s http://localhost:1976/v1/work-items \
+curl -s -X POST http://localhost:1976/v1/work-items \
   -H 'X-Axis-Tenant: local' \
   -H 'X-Axis-Workspace: default' \
+  -H 'Idempotency-Key: quickstart-wi-1' \
   -H 'Content-Type: application/json' \
   -d '{"id":"wi-1","title":"Implement durable scheduler persistence"}'
 
@@ -151,8 +152,8 @@ license, checksums, and SBOM. See [`releases/`](releases/) for the index.
 
 The OpenAPI contract is the source of truth for the public HTTP surface. SDKs
 must be generated or checked against it. Breaking changes require a major
-contract version. The contract revision is versioned independently from the
-runtime and binary release line.
+contract version. The current contract revision is `1.0.0`; it is versioned
+independently from the runtime and binary release line.
 
 ## License
 

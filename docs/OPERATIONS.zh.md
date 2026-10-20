@@ -406,7 +406,5 @@ prompt。
 
 - PRAXOVELA 的持久执行计时器证据仍由该产品负责。
 - `RuntimeAdapter` v1 不包含在 `1.0.0` 发布中。
-- OpenAPI 合同仍为 revision `0.1.0`；补齐全部 `/v1` 路由是 post-1.0 的第一
-  项路线图工作。
 - 多写者租约、HA leader election、多仓库协调、服务身份、联邦和企业策略不是
   core 功能。
