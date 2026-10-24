@@ -1,4 +1,4 @@
-﻿# Release Manifests
+# Release Manifests
 
 Published binary releases include checksums, the originating core version,
 license notices, CycloneDX SBOMs, and GPG signatures.
@@ -25,7 +25,8 @@ gpg --verify releases/v1.7.0/windows-amd64/SHA256SUMS.asc \
 - SBOMs: [`v1.7.0/sbom/`](v1.7.0/sbom/)
 - Signatures: `manifest.json.asc`, each `SHA256SUMS.asc`, and each SBOM `.asc`.
 - Source: [COORDIVELA core](https://github.com/axisvela/coordivela) at commit
-  `6ed3569ce085721ff02b127c2f151bf8da31b38d` (`v1.7.0`). Binaries are AGPL-3.0.
+  `47ed9ab3e84e0614725f534240cd42e70605decc` (`v1.7.0` plus the darwin
+  cross-compile fix). Binaries are AGPL-3.0.
 
 ## v1.3.0
 
