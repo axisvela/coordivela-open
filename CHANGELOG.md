@@ -10,6 +10,8 @@ All notable changes to COORDIVELA Open are documented here.
   release and contract revision.
 - Recorded Open's inherited community maturity and the refreshed Core
   `backend/v3.1.0` module tag at `49ba950`.
+- Published the Go SDK module tag `sdk/go/v3.0.0` at the `v1.7.1` release
+  commit.
 
 ## [1.7.1] - 2026-10-24
 

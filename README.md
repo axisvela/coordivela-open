@@ -90,7 +90,8 @@ license-enforced counter.
 - `contracts/openapi/coordivela.v1.yaml` - public HTTP contract.
 - `contracts/runtime-adapter/v1/` - RuntimeAdapter v1 semantics and JSON Schema.
 - `sdk/go/` - Go SDK covering work items, dependencies, lifecycle, schedules,
-  projections, SSE, and the RuntimeAdapter v1 contract/conformance kit.
+  projections, SSE, and the RuntimeAdapter v1 contract/conformance kit. The SDK
+  module is published as `sdk/go/v3.0.0`.
 - `examples/quickstart/` - end-to-end API example.
 - `examples/runtime-adapter/` - external RuntimeAdapter v1 example that passes
   the public conformance kit.
