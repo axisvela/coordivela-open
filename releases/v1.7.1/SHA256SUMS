@@ -1,0 +1,7 @@
+390d61878c5fa8150929b053555d70c77fe94df621afe43767fa1ac4451c4436  sbom/coordivela-backend.cdx.json
+03f8dd8eebb9e07488e1c7fcd8cef2315fdc388364d4c886c149a649192841f2  sbom/coordivela-frontend.cdx.json
+c6aa2a528497196afe78c3d370227a6c3eb305c3f58e3f8bcfdca8d53f8c96a4  COORDIVELA-RELEASE-SIGNING-KEY.asc
+f70bf4667e371927fa0666e7aa1b573589ce7b23e32ac8ad9f7f3192201ad7d0  coordivela-v1.7.1-darwin-arm64.zip
+6e60fbca1b0c98d96d1a5e40d3d02f76ec021a310011012b7625e485887e127d  coordivela-v1.7.1-linux-amd64.zip
+ec7be1acd6a4c69031d489290004249b2dd7e010baa9eced97a1a06b9cc9c879  coordivela-v1.7.1-windows-amd64.zip
+ad8d8e5af791335d9488fc8aa97a6eb846d940aecd1022e1eb695486d1e0590d  manifest.json
