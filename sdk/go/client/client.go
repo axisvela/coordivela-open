@@ -702,6 +702,55 @@ type SymbivelaAttention struct {
 	Priority    int    `json:"priority"`
 }
 
+// SymbivelaPlanSummary is the plan section of a SYMBIVELA work projection.
+type SymbivelaPlanSummary struct {
+	Version      int64    `json:"version"`
+	Objective    string   `json:"objective"`
+	Repositories []string `json:"repositories,omitempty"`
+	Dependencies []string `json:"dependencies,omitempty"`
+	UpdatedAt    string   `json:"updatedAt"`
+}
+
+// SymbivelaClaimSummary is one claim in a SYMBIVELA work projection.
+type SymbivelaClaimSummary struct {
+	ID         string `json:"id"`
+	Repository string `json:"repository"`
+	Path       string `json:"path"`
+	Mode       string `json:"mode"`
+}
+
+// SymbivelaFindingSummary is one finding in a SYMBIVELA work projection.
+type SymbivelaFindingSummary struct {
+	ID       string `json:"id"`
+	Kind     string `json:"kind"`
+	Severity string `json:"severity"`
+	Status   string `json:"status"`
+}
+
+// SymbivelaWorkProjection is the read-only per-work-item SYMBIVELA projection.
+type SymbivelaWorkProjection struct {
+	WorkItemID       string                    `json:"workItemId"`
+	GoalRef          string                    `json:"goalRef"`
+	WorkspaceID      string                    `json:"workspaceId"`
+	Repository       string                    `json:"repository"`
+	State            string                    `json:"state"`
+	OwnerKind        string                    `json:"ownerKind"`
+	OwnerRef         string                    `json:"ownerRef"`
+	Version          int64                     `json:"version"`
+	UpdatedAt        string                    `json:"updatedAt"`
+	CoordinationPlan *SymbivelaPlanSummary     `json:"coordinationPlan,omitempty"`
+	Claims           []SymbivelaClaimSummary   `json:"claims,omitempty"`
+	Findings         []SymbivelaFindingSummary `json:"findings,omitempty"`
+	EvidenceRefs     []string                  `json:"evidenceRefs,omitempty"`
+}
+
+// AttachOpenCodeRequest binds an existing OpenCode session to a work item.
+type AttachOpenCodeRequest struct {
+	SessionID      string `json:"sessionId"`
+	FencingToken   int64  `json:"fencingToken"`
+	IdempotencyKey string `json:"-"`
+}
+
 // SymbivelaAttention returns read-only SYMBIVELA attention for the client scope.
 func (c *Client) SymbivelaAttention(ctx context.Context) ([]SymbivelaAttention, error) {
 	var out struct {
@@ -729,6 +778,24 @@ func (c *Client) WorkItemProjection(ctx context.Context, id string) (*WorkItem, 
 		return nil, nil, err
 	}
 	return out.WorkItem, out.Dependencies, nil
+}
+
+// SymbivelaWorkItemProjection returns the read-only SYMBIVELA projection for one work item.
+func (c *Client) SymbivelaWorkItemProjection(ctx context.Context, id string) (*SymbivelaWorkProjection, error) {
+	var out SymbivelaWorkProjection
+	if err := c.do(ctx, http.MethodGet, "/v1/projections/work-items/"+pathEscape(id)+"/symbivela", nil, &out); err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// AttachOpenCodeSession binds an existing OpenCode session to one work item.
+func (c *Client) AttachOpenCodeSession(ctx context.Context, id string, req AttachOpenCodeRequest) (*WorkItem, error) {
+	var out workItemResponse
+	if err := c.do(ctx, http.MethodPost, "/v1/work-items/"+pathEscape(id)+"/attach-opencode", req, &out, req.IdempotencyKey); err != nil {
+		return nil, err
+	}
+	return out.WorkItem, nil
 }
 
 // StreamEvents opens the SSE coordination stream. The caller must close the
