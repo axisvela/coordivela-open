@@ -54,6 +54,60 @@ func TestCreateAndListWorkItems(t *testing.T) {
 	}
 }
 
+func TestSymbivelaWorkItemProjection(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet || r.URL.Path != "/v1/projections/work-items/wi-1/symbivela" {
+			http.NotFound(w, r)
+			return
+		}
+		_ = json.NewEncoder(w).Encode(SymbivelaWorkProjection{
+			WorkItemID:  "wi-1",
+			WorkspaceID: "default",
+			Repository:  "repo",
+			State:       "executing",
+			Version:     3,
+		})
+	}))
+	defer srv.Close()
+
+	got, err := New(srv.URL, "acme", "default").SymbivelaWorkItemProjection(context.Background(), "wi-1")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got.WorkItemID != "wi-1" || got.State != "executing" || got.Version != 3 {
+		t.Fatalf("projection = %+v", got)
+	}
+}
+
+func TestAttachOpenCodeSession(t *testing.T) {
+	var body map[string]any
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost || r.URL.Path != "/v1/work-items/wi-1/attach-opencode" {
+			http.NotFound(w, r)
+			return
+		}
+		if r.Header.Get("Idempotency-Key") == "" {
+			t.Error("missing idempotency key")
+		}
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+			t.Fatal(err)
+		}
+		_ = json.NewEncoder(w).Encode(map[string]any{"workItem": WorkItem{ID: "wi-1", State: "executing", Version: 4}})
+	}))
+	defer srv.Close()
+
+	got, err := New(srv.URL, "acme", "default").AttachOpenCodeSession(context.Background(), "wi-1", AttachOpenCodeRequest{SessionID: "ses-1", FencingToken: 2})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got.ID != "wi-1" || got.Version != 4 {
+		t.Fatalf("work item = %+v", got)
+	}
+	if body["sessionId"] != "ses-1" {
+		t.Fatalf("body = %+v", body)
+	}
+}
+
 func TestCreateWorkItemWithKey(t *testing.T) {
 	const key = "goal-42-wi-1"
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

@@ -14,18 +14,19 @@ type PlanStep struct {
 }
 
 type CoordinationPlan struct {
-	TenantID     string     `json:"tenantId"`
-	WorkspaceID  string     `json:"workspaceId"`
-	WorkItemID   string     `json:"workItemId"`
-	Version      int64      `json:"version"`
-	Objective    string     `json:"objective"`
-	Steps        []PlanStep `json:"steps,omitempty"`
-	Repositories []string   `json:"repositories,omitempty"`
-	Paths        []string   `json:"paths,omitempty"`
-	Dependencies []string   `json:"dependencies,omitempty"`
-	EvidenceRefs []string   `json:"evidenceRefs,omitempty"`
-	CreatedAt    string     `json:"createdAt,omitempty"`
-	UpdatedAt    string     `json:"updatedAt,omitempty"`
+	TenantID            string     `json:"tenantId"`
+	WorkspaceID         string     `json:"workspaceId"`
+	WorkItemID          string     `json:"workItemId"`
+	Version             int64      `json:"version"`
+	ExpectedItemVersion int64      `json:"expectedItemVersion,omitempty"`
+	Objective           string     `json:"objective"`
+	Steps               []PlanStep `json:"steps,omitempty"`
+	Repositories        []string   `json:"repositories,omitempty"`
+	Paths               []string   `json:"paths,omitempty"`
+	Dependencies        []string   `json:"dependencies,omitempty"`
+	EvidenceRefs        []string   `json:"evidenceRefs,omitempty"`
+	CreatedAt           string     `json:"createdAt,omitempty"`
+	UpdatedAt           string     `json:"updatedAt,omitempty"`
 }
 
 type SaveCoordinationPlanRequest struct {
@@ -41,18 +42,19 @@ type SaveCoordinationPlanRequest struct {
 }
 
 type CoordinationClaim struct {
-	ID           string `json:"id"`
-	TenantID     string `json:"tenantId"`
-	WorkspaceID  string `json:"workspaceId"`
-	WorkItemID   string `json:"workItemId"`
-	Repository   string `json:"repository"`
-	Path         string `json:"path"`
-	Mode         string `json:"mode"`
-	LeaseID      string `json:"leaseId"`
-	FencingToken int64  `json:"fencingToken"`
-	ExpiresAt    string `json:"expiresAt"`
-	ReleasedAt   string `json:"releasedAt,omitempty"`
-	CreatedAt    string `json:"createdAt"`
+	ID              string `json:"id"`
+	TenantID        string `json:"tenantId"`
+	WorkspaceID     string `json:"workspaceId"`
+	WorkItemID      string `json:"workItemId"`
+	Repository      string `json:"repository"`
+	Path            string `json:"path"`
+	Mode            string `json:"mode"`
+	LeaseID         string `json:"leaseId"`
+	FencingToken    int64  `json:"fencingToken"`
+	ExpectedVersion int64  `json:"expectedVersion,omitempty"`
+	ExpiresAt       string `json:"expiresAt"`
+	ReleasedAt      string `json:"releasedAt,omitempty"`
+	CreatedAt       string `json:"createdAt"`
 }
 
 type AddCoordinationClaimRequest struct {
@@ -96,6 +98,9 @@ type CoordinationDirective struct {
 	AuthorizationRef string            `json:"authorizationRef,omitempty"`
 	DispatchedAt     string            `json:"dispatchedAt,omitempty"`
 	Outcome          *DirectiveOutcome `json:"outcome,omitempty"`
+	DeliveryState    string            `json:"deliveryState"`
+	AttemptCount     int               `json:"attemptCount"`
+	DeliveryNote     string            `json:"deliveryNote,omitempty"`
 	CreatedAt        string            `json:"createdAt"`
 	UpdatedAt        string            `json:"updatedAt"`
 }

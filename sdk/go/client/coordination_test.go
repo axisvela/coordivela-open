@@ -64,6 +64,15 @@ func TestCoordinationPlanAndClaims(t *testing.T) {
 	}
 }
 
+func TestCoordinationTypeFieldCoverage(t *testing.T) {
+	plan := CoordinationPlan{ExpectedItemVersion: 7}
+	claim := CoordinationClaim{ExpectedVersion: 7}
+	directive := CoordinationDirective{DeliveryState: "delivered", AttemptCount: 1, DeliveryNote: "ok"}
+	if plan.ExpectedItemVersion != 7 || claim.ExpectedVersion != 7 || directive.AttemptCount != 1 {
+		t.Fatal("missing coordination fields")
+	}
+}
+
 func TestCoordinationFindingsAndDirectives(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch {
