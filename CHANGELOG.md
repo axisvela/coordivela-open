@@ -2,7 +2,7 @@
 
 All notable changes to COORDIVELA Open are documented here.
 
-## [1.7.0] - 2026-10-24
+## [1.7.1] - 2026-10-24
 
 ### Added
 
@@ -10,14 +10,13 @@ All notable changes to COORDIVELA Open are documented here.
 - SYMBIVELA per-work-item projection and OpenCode session attach paths.
 - Go SDK coverage for coordination fields, SYMBIVELA work projection, and
   OpenCode attach.
-- Approved 1.7.0 core binaries for windows/amd64, linux/amd64, and darwin/arm64,
-  with checksums, CycloneDX SBOMs, and GPG signatures under `releases/v1.7.0/`.
-  The binaries include the post-tag darwin cross-compile fix recorded in the
-  release manifest.
+- Approved 1.7.1 core binaries for windows/amd64, linux/amd64, and darwin/arm64,
+  with checksums, CycloneDX SBOMs, and GPG signatures under `releases/v1.7.1/`.
+  The binaries include the darwin cross-compile fix released as Core 1.7.1.
 
 ### Changed
 
-- Aligned the open version line with Core 1.7.0.
+- Aligned the open version line with Core 1.7.1.
 - Corrected the contract revision references to match the OpenAPI contract.
 
 ## [1.3.0] - 2026-10-20
