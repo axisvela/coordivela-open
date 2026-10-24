@@ -2,6 +2,15 @@
 
 All notable changes to COORDIVELA Open are documented here.
 
+## [Unreleased]
+
+### Documentation
+
+- Aligned `README.md`, `README.zh.md`, and both operations manuals to the 1.7.1
+  release and contract revision.
+- Recorded Open's inherited community maturity and the refreshed Core
+  `backend/v3.1.0` module tag at `49ba950`.
+
 ## [1.7.1] - 2026-10-24
 
 ### Added

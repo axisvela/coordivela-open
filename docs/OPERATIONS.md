@@ -2,7 +2,7 @@
 
 # COORDIVELA Operations Manual
 
-This manual covers the community COORDIVELA Core runtime in the `1.0.0` line:
+This manual covers the community COORDIVELA Core runtime in the `1.7.1` line:
 installation, configuration, PostgreSQL setup, startup, health checks, backups,
 upgrades, monitoring, and troubleshooting.
 
@@ -425,7 +425,7 @@ Credentials and raw prompts must not be published.
 
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
-- `RuntimeAdapter` v1 has been part of the release line since `1.1.0` and is
+- `RuntimeAdapter` v1 has been part of the release line since `1.2.0` and is
   included in `1.7.1`.
 - Multi-writer leases, HA leader election, multi-repository coordination,
   service identity, federation, and enterprise policy are not core features.
