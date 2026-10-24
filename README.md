@@ -101,9 +101,9 @@ license-enforced counter.
 
 ## Current Release
 
-`1.3.0` is the current release, matching the core version line. Signed
+`1.7.0` is the current release, matching the core version line. Signed
 binaries, checksums, and SBOMs are published under
-[`releases/v1.3.0/`](releases/v1.3.0/) for windows/amd64, linux/amd64, and
+[`releases/v1.7.0/`](releases/v1.7.0/) for windows/amd64, linux/amd64, and
 darwin/arm64.
 
 Known limitations:
@@ -111,10 +111,12 @@ Known limitations:
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
 
-The OpenAPI contract is revision `1.3.0` and covers the published `/v1` routes.
+The OpenAPI contract is revision `1.7.0` and covers the published `/v1` routes,
+including coordination plans, claims, findings, directives, per-work-item
+SYMBIVELA projection, and OpenCode session attachment.
 
 The RuntimeAdapter v1 contract, Go interface, JSON Schema, and conformance kit
-are included in the `v1.1.0` through `v1.3.0` source releases under
+are included in the `v1.1.0` through `v1.7.0` source releases under
 `contracts/runtime-adapter/v1/`, `sdk/go/adapter/`, and
 `sdk/go/adapter/conformance/`.
 
@@ -161,7 +163,7 @@ license, checksums, and SBOM. See [`releases/`](releases/) for the index.
 
 The OpenAPI contract is the source of truth for the public HTTP surface. SDKs
 must be generated or checked against it. Breaking changes require a major
-contract version. The current contract revision is `1.0.0`; it is versioned
+contract version. The current contract revision is `1.7.0`; it is versioned
 independently from the runtime and binary release line.
 
 ## License
