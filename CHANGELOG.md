@@ -2,6 +2,22 @@
 
 All notable changes to COORDIVELA Open are documented here.
 
+## [1.7.0] - 2026-10-24
+
+### Added
+
+- Coordination-loop OpenAPI paths for plans, claims, findings, and directives.
+- SYMBIVELA per-work-item projection and OpenCode session attach paths.
+- Go SDK coverage for coordination fields, SYMBIVELA work projection, and
+  OpenCode attach.
+- Approved 1.7.0 core binaries for windows/amd64, linux/amd64, and darwin/arm64,
+  with checksums, CycloneDX SBOMs, and GPG signatures under `releases/v1.7.0/`.
+
+### Changed
+
+- Aligned the open version line with Core 1.7.0.
+- Corrected the contract revision references to match the OpenAPI contract.
+
 ## [1.3.0] - 2026-10-20
 
 ### Added

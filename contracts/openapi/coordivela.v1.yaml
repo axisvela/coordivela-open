@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: COORDIVELA Coordination API
-  version: 1.3.0
+  version: 1.7.0
   description: |
     Public contract for the COORDIVELA Development Coordination Control Plane.
 
@@ -25,6 +25,7 @@ tags:
   - name: Dependencies
   - name: Assignments
   - name: Lifecycle
+  - name: Coordination
   - name: Schedules
   - name: Projections
   - name: Events
@@ -165,6 +166,230 @@ paths:
                 $ref: "#/components/schemas/ConflictList"
         "404":
           $ref: "#/components/responses/NotFound"
+  /work-items/{id}/coordination/plan:
+    parameters:
+      - $ref: "#/components/parameters/WorkItemId"
+      - $ref: "#/components/parameters/TenantHeader"
+      - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      - $ref: "#/components/parameters/PrincipalHeaderRequired"
+    get:
+      tags: [Coordination]
+      operationId: getCoordinationPlan
+      summary: Read the current leased coordination plan
+      responses:
+        "200":
+          description: Coordination plan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationPlan"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    post:
+      tags: [Coordination]
+      operationId: saveCoordinationPlan
+      summary: Save a leased coordination plan
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveCoordinationPlanRequest"
+      responses:
+        "200":
+          description: Saved coordination plan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationPlan"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/coordination/claims:
+    parameters:
+      - $ref: "#/components/parameters/WorkItemId"
+      - $ref: "#/components/parameters/TenantHeader"
+      - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      - $ref: "#/components/parameters/PrincipalHeaderRequired"
+    get:
+      tags: [Coordination]
+      operationId: listCoordinationClaims
+      summary: List active path claims
+      responses:
+        "200":
+          description: Coordination claims
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationClaimList"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    post:
+      tags: [Coordination]
+      operationId: addCoordinationClaim
+      summary: Claim a repository path
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddCoordinationClaimRequest"
+      responses:
+        "201":
+          description: Created coordination claim
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationClaim"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/coordination/claims/{claimId}:
+    delete:
+      tags: [Coordination]
+      operationId: releaseCoordinationClaim
+      summary: Release a path claim
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - name: claimId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/PrincipalHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+        - name: fencingToken
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Claim released
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/coordination/findings:
+    get:
+      tags: [Coordination]
+      operationId: listCoordinationFindings
+      summary: List deterministic coordination findings
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/PrincipalHeaderRequired"
+      responses:
+        "200":
+          description: Coordination findings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationFindingList"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/coordination/directives:
+    get:
+      tags: [Coordination]
+      operationId: listCoordinationDirectives
+      summary: List delivered coordination directives
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/PrincipalHeaderRequired"
+      responses:
+        "200":
+          description: Coordination directives
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationDirectiveList"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /work-items/{id}/coordination/directives/{directiveId}/outcome:
+    post:
+      tags: [Coordination]
+      operationId: recordCoordinationDirectiveOutcome
+      summary: Record the outcome of a coordination directive
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - name: directiveId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/PrincipalHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DirectiveOutcomeRequest"
+      responses:
+        "200":
+          description: Updated coordination directive
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoordinationDirective"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /work-items/{id}/dependencies:
     parameters:
       - $ref: "#/components/parameters/WorkItemId"
@@ -745,6 +970,38 @@ paths:
           $ref: "#/components/responses/NotFound"
         "409":
           $ref: "#/components/responses/Conflict"
+  /work-items/{id}/attach-opencode:
+    post:
+      tags: [Lifecycle]
+      operationId: attachOpenCodeSession
+      summary: Bind an existing OpenCode session to a work item
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeader"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/AegivelaAssertion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AttachOpenCodeRequest"
+      responses:
+        "200":
+          description: Work item bound to the OpenCode session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /schedules:
     get:
       tags: [Schedules]
@@ -1041,6 +1298,26 @@ paths:
                 $ref: "#/components/schemas/WorkItemProjection"
         "404":
           $ref: "#/components/responses/NotFound"
+  /projections/work-items/{id}/symbivela:
+    get:
+      tags: [Projections]
+      operationId: getSymbivelaWorkItemProjection
+      summary: Read the read-only SYMBIVELA work projection for one work item
+      parameters:
+        - $ref: "#/components/parameters/WorkItemId"
+        - $ref: "#/components/parameters/TenantHeaderRequired"
+        - $ref: "#/components/parameters/WorkspaceHeaderRequired"
+      responses:
+        "200":
+          description: SYMBIVELA work projection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SymbivelaWorkProjection"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /events:
     get:
       tags: [Events]
@@ -1814,6 +2091,355 @@ components:
         data:
           type: object
           additionalProperties: true
+    PlanStep:
+      type: object
+      required: [id, title]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+    CoordinationPlan:
+      type: object
+      required: [tenantId, workspaceId, workItemId, version, objective, createdAt, updatedAt]
+      properties:
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        workItemId:
+          type: string
+        version:
+          type: integer
+          format: int64
+        expectedItemVersion:
+          type: integer
+          format: int64
+        objective:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlanStep"
+        repositories:
+          type: array
+          items:
+            type: string
+        paths:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+        evidenceRefs:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    SaveCoordinationPlanRequest:
+      type: object
+      required: [fencingToken, objective]
+      properties:
+        fencingToken:
+          type: integer
+          format: int64
+        version:
+          type: integer
+          format: int64
+        objective:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlanStep"
+        repositories:
+          type: array
+          items:
+            type: string
+        paths:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+        evidenceRefs:
+          type: array
+          items:
+            type: string
+    CoordinationClaim:
+      type: object
+      required: [id, tenantId, workspaceId, workItemId, repository, path, mode, leaseId, fencingToken, expiresAt, createdAt]
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        workItemId:
+          type: string
+        repository:
+          type: string
+        path:
+          type: string
+        mode:
+          type: string
+          enum: [read, write, execute]
+        leaseId:
+          type: string
+        fencingToken:
+          type: integer
+          format: int64
+        expectedVersion:
+          type: integer
+          format: int64
+        expiresAt:
+          type: string
+          format: date-time
+        releasedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    AddCoordinationClaimRequest:
+      type: object
+      required: [fencingToken, repository, path, mode]
+      properties:
+        fencingToken:
+          type: integer
+          format: int64
+        repository:
+          type: string
+        path:
+          type: string
+        mode:
+          type: string
+          enum: [read, write, execute]
+    CoordinationClaimList:
+      type: object
+      required: [claims]
+      properties:
+        claims:
+          type: array
+          items:
+            $ref: "#/components/schemas/CoordinationClaim"
+    CoordinationFinding:
+      type: object
+      required: [id, tenantId, workspaceId, workItemId, kind, severity, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        workItemId:
+          type: string
+        kind:
+          type: string
+          enum: [path_conflict, duplicate_work, dependency_not_ready, scope_drift, loop_detected]
+        severity:
+          type: string
+          enum: [info, warning, blocking]
+        status:
+          type: string
+          enum: [open, resolved, dismissed]
+        evidence:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CoordinationFindingList:
+      type: object
+      required: [findings]
+      properties:
+        findings:
+          type: array
+          items:
+            $ref: "#/components/schemas/CoordinationFinding"
+    DirectiveOutcome:
+      type: object
+      required: [kind, recordedAt]
+      properties:
+        kind:
+          type: string
+        note:
+          type: string
+        recordedBy:
+          type: string
+        recordedAt:
+          type: string
+          format: date-time
+    CoordinationDirective:
+      type: object
+      required: [id, tenantId, workspaceId, workItemId, findingId, kind, status, message, idempotencyKey, deliveryState, attemptCount, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+        workspaceId:
+          type: string
+        workItemId:
+          type: string
+        findingId:
+          type: string
+        kind:
+          type: string
+          enum: [avoid_path, wait_for_dependency, handoff, pause, request_evidence]
+        status:
+          type: string
+          enum: [pending, dispatched, failed, ambiguous, applied, superseded]
+        message:
+          type: string
+        idempotencyKey:
+          type: string
+        authorizationRef:
+          type: string
+        dispatchedAt:
+          type: string
+          format: date-time
+          nullable: true
+        outcome:
+          $ref: "#/components/schemas/DirectiveOutcome"
+        deliveryState:
+          type: string
+          enum: [pending, sending, dispatched, failed, ambiguous]
+        attemptCount:
+          type: integer
+        deliveryNote:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CoordinationDirectiveList:
+      type: object
+      required: [directives]
+      properties:
+        directives:
+          type: array
+          items:
+            $ref: "#/components/schemas/CoordinationDirective"
+    DirectiveOutcomeRequest:
+      type: object
+      required: [outcome]
+      properties:
+        outcome:
+          type: string
+        note:
+          type: string
+    SymbivelaPlanSummary:
+      type: object
+      required: [version, objective, updatedAt]
+      properties:
+        version:
+          type: integer
+          format: int64
+        objective:
+          type: string
+        repositories:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+        updatedAt:
+          type: string
+          format: date-time
+    SymbivelaClaimSummary:
+      type: object
+      required: [id, repository, path, mode]
+      properties:
+        id:
+          type: string
+        repository:
+          type: string
+        path:
+          type: string
+        mode:
+          type: string
+          enum: [read, write, execute]
+    SymbivelaFindingSummary:
+      type: object
+      required: [id, kind, severity, status]
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+        severity:
+          type: string
+        status:
+          type: string
+    SymbivelaWorkProjection:
+      type: object
+      required: [workItemId, goalRef, workspaceId, repository, state, ownerKind, ownerRef, version, updatedAt]
+      properties:
+        workItemId:
+          type: string
+        goalRef:
+          type: string
+        workspaceId:
+          type: string
+        repository:
+          type: string
+        state:
+          $ref: "#/components/schemas/WorkItemState"
+        ownerKind:
+          type: string
+        ownerRef:
+          type: string
+        version:
+          type: integer
+          format: int64
+        updatedAt:
+          type: string
+          format: date-time
+        coordinationPlan:
+          $ref: "#/components/schemas/SymbivelaPlanSummary"
+        claims:
+          type: array
+          items:
+            $ref: "#/components/schemas/SymbivelaClaimSummary"
+        findings:
+          type: array
+          items:
+            $ref: "#/components/schemas/SymbivelaFindingSummary"
+        evidenceRefs:
+          type: array
+          items:
+            type: string
+    AttachOpenCodeRequest:
+      type: object
+      required: [sessionId]
+      properties:
+        sessionId:
+          type: string
+        fencingToken:
+          type: integer
+          format: int64
     HealthResponse:
       type: object
       required: [status, version]
