@@ -12,6 +12,8 @@ All notable changes to COORDIVELA Open are documented here.
   OpenCode attach.
 - Approved 1.7.0 core binaries for windows/amd64, linux/amd64, and darwin/arm64,
   with checksums, CycloneDX SBOMs, and GPG signatures under `releases/v1.7.0/`.
+  The binaries include the post-tag darwin cross-compile fix recorded in the
+  release manifest.
 
 ### Changed
 
