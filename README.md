@@ -102,33 +102,31 @@ license-enforced counter.
 
 ## Current Release
 
-`1.7.1` is the current release, matching the core version line. Signed
+`1.7.2` is the current release, matching the core version line. Signed
 binaries, checksums, and SBOMs are published under
-[`releases/v1.7.1/`](releases/v1.7.1/) for windows/amd64, linux/amd64, and
+[`releases/v1.7.2/`](releases/v1.7.2/) for windows/amd64, linux/amd64, and
 darwin/arm64.
 
 Open is the distribution surface and inherits Core's community 1.x maturity. It
 does not imply EE production readiness. The Core Go module tag
 `backend/v3.1.2` is at `dadf5bc` and covers the 1.7.x runtime and the updated
-Harmovela module path; Open binaries are built from the `v1.7.1` source commit
+Harmovela module path; Open binaries are built from the `v1.7.2` source commit
 recorded in each manifest.
 
-Source-level gates on 2026-10-24: Go SDK tests, `go vet`, and `go build` pass,
-and the signed 1.7.1 release artifacts are present.
+Source-level gates on 2026-10-25: Go SDK tests, `go vet`, and `go build` pass,
+and the signed 1.7.2 release artifacts are present.
 
 Known limitations:
 
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
-- The published `v1.7.1` binaries were built with Go `1.26.9` and include
-  GO-2026-6809; a patch rebuild with Go `1.26.10` is pending.
 
-The OpenAPI contract is revision `1.7.1` and covers the published `/v1` routes,
+The OpenAPI contract is revision `1.7.2` and covers the published `/v1` routes,
 including coordination plans, claims, findings, directives, per-work-item
 SYMBIVELA projection, and OpenCode session attachment.
 
 The RuntimeAdapter v1 contract, Go interface, JSON Schema, and conformance kit
-are included in the `v1.2.0` through `v1.7.1` source releases under
+are included in the `v1.2.0` through `v1.7.2` source releases under
 `contracts/runtime-adapter/v1/`, `sdk/go/adapter/`, and
 `sdk/go/adapter/conformance/`.
 

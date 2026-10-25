@@ -1,0 +1,19 @@
+COORDIVELA Core Binary Release v1.7.2
+
+Source: https://github.com/axisvela/coordivela commit d55155772dac22424c549c4b99e45342dfe25b82 (v1.7.2).
+Built with: Go 1.26.10, CGO disabled, trimpath.
+Platform: darwin/arm64.
+
+Artifacts:
+  - coordivela: coordination server (HTTP API).
+  - coordivela-migrate: PostgreSQL schema migration helper.
+  - coordivela-opencode-probe: read-only OpenCode observation probe.
+
+Linked module checkouts used by the core local replace directives:
+  - harmovela: c970388127daca483bfba8ba4176ba6e0804ebd5
+  - symbivela-open: 73c77e6ef791b3278d635c37f6ec6c2f912c9e4d
+  - mnemovela-open: 605fede129967e387ecb9fbf0b065ad61c509016
+  - gnosivela-open: 29d288fb01c54a8ebf391a4aec5f12d008e61110
+  - tekmovela-open: e844a005a32ee8453b92bdadf026de4af7ebe099
+
+License: AGPL-3.0. See LICENSE-COORDIVELA-CORE.txt.

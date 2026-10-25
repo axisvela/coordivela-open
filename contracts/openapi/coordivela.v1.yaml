@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: COORDIVELA Coordination API
-  version: 1.7.1
+  version: 1.7.2
   description: |
     Public contract for the COORDIVELA Development Coordination Control Plane.
 

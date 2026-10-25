@@ -6,16 +6,28 @@ license notices, CycloneDX SBOMs, and GPG signatures.
 ## Signing Key
 
 The COORDIVELA release signing key is published as
-`v1.7.1/COORDIVELA-RELEASE-SIGNING-KEY.asc`. Import it and verify a release:
+`v1.7.2/COORDIVELA-RELEASE-SIGNING-KEY.asc`. Import it and verify a release:
 
 ```bash
-gpg --import releases/v1.7.1/COORDIVELA-RELEASE-SIGNING-KEY.asc
-gpg --verify releases/v1.7.1/manifest.json.asc releases/v1.7.1/manifest.json
-gpg --verify releases/v1.7.1/sbom/coordivela-backend.cdx.json.asc \
-  releases/v1.7.1/sbom/coordivela-backend.cdx.json
-gpg --verify releases/v1.7.1/windows-amd64/SHA256SUMS.asc \
-  releases/v1.7.1/windows-amd64/SHA256SUMS
+gpg --import releases/v1.7.2/COORDIVELA-RELEASE-SIGNING-KEY.asc
+gpg --verify releases/v1.7.2/manifest.json.asc releases/v1.7.2/manifest.json
+gpg --verify releases/v1.7.2/sbom/coordivela-backend.cdx.json.asc \
+  releases/v1.7.2/sbom/coordivela-backend.cdx.json
+gpg --verify releases/v1.7.2/windows-amd64/SHA256SUMS.asc \
+  releases/v1.7.2/windows-amd64/SHA256SUMS
 ```
+
+## v1.7.2
+
+- Manifest: [`v1.7.2/`](v1.7.2/)
+- Binaries: `coordivela`, `coordivela-migrate`, and
+  `coordivela-opencode-probe` for windows/amd64, linux/amd64, and darwin/arm64.
+- Build: Go `1.26.10`, CGO disabled, `-trimpath`, `-buildvcs=false`.
+- SBOMs: [`v1.7.2/sbom/`](v1.7.2/sbom/)
+- Signatures: `manifest.json.asc`, each `SHA256SUMS.asc`, and each SBOM `.asc`.
+- Source: [COORDIVELA core](https://github.com/axisvela/coordivela) at commit
+  `de7d9c5418cb78ee7639aea52ef220ad5ca83849` (`v1.7.2`). Binaries are AGPL-3.0.
+- Security: rebuilds for GO-2026-6809 in `crypto/x509`.
 
 ## v1.7.1
 

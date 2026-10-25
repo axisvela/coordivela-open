@@ -86,25 +86,23 @@ Core 和 Open 共享版本线；EE 独立发布，并声明其支持的 core 版
 
 ## 当前版本
 
-`1.7.1` 是当前社区版本，与 core 版本线一致。经批准的二进制、校验和及 SBOM
-发布在 [`releases/v1.7.1/`](releases/v1.7.1/)，覆盖 windows/amd64、
+`1.7.2` 是当前社区版本，与 core 版本线一致。经批准的二进制、校验和及 SBOM
+发布在 [`releases/v1.7.2/`](releases/v1.7.2/)，覆盖 windows/amd64、
 linux/amd64 和 darwin/arm64。
 
 Open 是分发面，继承 Core 的社区 1.x 成熟度；它不代表 EE 已生产就绪。Core 的
 Go module tag `backend/v3.1.2` 位于 `dadf5bc`，覆盖 1.7.x 运行时和更新后的
-Harmovela module path；Open 二进制由各发布清单记录的 `v1.7.1` 源码提交构建。
+Harmovela module path；Open 二进制由各发布清单记录的 `v1.7.2` 源码提交构建。
 
-2026-10-24 源级门禁：Go SDK 测试、`go vet` 和 `go build` 通过，1.7.1 签名发布
+2026-10-25 源级门禁：Go SDK 测试、`go vet` 和 `go build` 通过，1.7.2 签名发布
 产物齐全。
 
 已知限制：
 
 - PRAXOVELA 的持久执行计时器证据仍由该产品负责。
-- 已发布的 `v1.7.1` 二进制由 Go `1.26.9` 构建，包含 GO-2026-6809；需要用 Go
-  `1.26.10` 重新构建并发布补丁版本。
-- `RuntimeAdapter` v1 自 `1.2.0` 起包含，`1.7.1` 继续提供。
+- `RuntimeAdapter` v1 自 `1.2.0` 起包含，`1.7.2` 继续提供。
 
-OpenAPI 合同为 revision `1.7.1`，覆盖已发布的 `/v1` 路由，包括协调计划、
+OpenAPI 合同为 revision `1.7.2`，覆盖已发布的 `/v1` 路由，包括协调计划、
 claim、finding、directive、按工作项的 SYMBIVELA 投影和 OpenCode 会话附加。
 
 post-1.0 的排期见 [core 路线图](https://github.com/axisvela/coordivela/blob/main/ROADMAP.md)。

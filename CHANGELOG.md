@@ -4,20 +4,29 @@ All notable changes to COORDIVELA Open are documented here.
 
 ## [Unreleased]
 
+## [1.7.2] - 2026-10-25
+
+Security patch release. Rebuilds the published binaries with Go `1.26.10` and
+aligns Open with Core `1.7.2`.
+
 ### Security
 
-- The published `v1.7.1` binaries were built with Go `1.26.9` and include
-  GO-2026-6809 in `crypto/x509`. Rebuild and publish a patch release with Go
-  `1.26.10` before relying on the binaries.
+- Rebuilt the windows/amd64, linux/amd64, and darwin/arm64 binaries with Go
+  `1.26.10`, fixing GO-2026-6809 in `crypto/x509`.
+
+### Changed
+
+- Aligned the Open version line and OpenAPI revision to `1.7.2`.
+- Recorded Core module tag `backend/v3.1.2` at `dadf5bc`.
+- Published the Go SDK module tag `sdk/go/v3.0.0` at the `v1.7.1` release
+  commit.
 
 ### Documentation
 
-- Aligned `README.md`, `README.zh.md`, and both operations manuals to the 1.7.1
+- Aligned `README.md`, `README.zh.md`, and both operations manuals to the 1.7.2
   release and contract revision.
 - Recorded Open's inherited community maturity and the refreshed Core
-  `backend/v3.1.1` module tag at `4e8508a`.
-- Published the Go SDK module tag `sdk/go/v3.0.0` at the `v1.7.1` release
-  commit.
+  `backend/v3.1.2` module tag.
 
 ## [1.7.1] - 2026-10-24
 

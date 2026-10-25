@@ -2,7 +2,7 @@
 
 # COORDIVELA Operations Manual
 
-This manual covers the community COORDIVELA Core runtime in the `1.7.1` line:
+This manual covers the community COORDIVELA Core runtime in the `1.7.2` line:
 installation, configuration, PostgreSQL setup, startup, health checks, backups,
 upgrades, monitoring, and troubleshooting.
 
@@ -19,7 +19,7 @@ Core does not issue or verify service identities.
 
 ## Prerequisites
 
-- PostgreSQL 18.x. The 1.7.1 release is tested against PostgreSQL 18.1.
+- PostgreSQL 18.x. The 1.7.2 release is tested against PostgreSQL 18.1.
 - A released binary for one of:
   - `windows/amd64`
   - `linux/amd64`
@@ -35,9 +35,9 @@ Core does not issue or verify service identities.
 ## Install From Release Binaries
 
 Download the archive for your platform from
-[`releases/v1.7.1/`](../releases/v1.7.1/), or from the GitHub release:
+[`releases/v1.7.2/`](../releases/v1.7.2/), or from the GitHub release:
 
-<https://github.com/axisvela/coordivela-open/releases/tag/v1.7.1>
+<https://github.com/axisvela/coordivela-open/releases/tag/v1.7.2>
 
 Verify the archive before extracting it.
 
@@ -63,11 +63,11 @@ Each platform directory contains:
 - `LICENSE-COORDIVELA-CORE.txt` - AGPL-3.0 license.
 - `SHA256SUMS` - checksums for the directory contents.
 
-The `1.7.1` binary archives do not embed SQL migrations. Obtain the matching
+The `1.7.2` binary archives do not embed SQL migrations. Obtain the matching
 `backend/migrations` directory from the core tag:
 
 ```sh
-git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
+git clone --branch v1.7.2 https://github.com/axisvela/coordivela.git
 ```
 
 Use `coordivela/backend/migrations` with `coordivela-migrate`.
@@ -75,7 +75,7 @@ Use `coordivela/backend/migrations` with `coordivela-migrate`.
 ## Build From Source
 
 ```sh
-git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
+git clone --branch v1.7.2 https://github.com/axisvela/coordivela.git
 cd coordivela/backend
 GOWORK=off go build -trimpath -o ../coordivela ./cmd/coordivela
 GOWORK=off go build -trimpath -o ../coordivela-migrate ./cmd/coordivela-migrate
@@ -232,14 +232,14 @@ service during an upgrade.
 The core repository includes a local compose profile:
 
 ```sh
-git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
+git clone --branch v1.7.2 https://github.com/axisvela/coordivela.git
 cd coordivela
 docker compose -f deploy/compose.yaml up --build
 ```
 
 This profile starts PostgreSQL and the API. It is a local/development profile,
 not a production orchestrator. No official container image is published for
-`1.7.1`; build from source or use the released binaries.
+`1.7.2`; build from source or use the released binaries.
 
 ## Verify The Installation
 
@@ -252,7 +252,7 @@ curl -s http://127.0.0.1:1976/healthz
 Expected:
 
 ```json
-{"status":"ok","version":"1.7.1"}
+{"status":"ok","version":"1.7.2"}
 ```
 
 Readiness:
@@ -426,6 +426,6 @@ Credentials and raw prompts must not be published.
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
 - `RuntimeAdapter` v1 has been part of the release line since `1.2.0` and is
-  included in `1.7.1`.
+  included in `1.7.2`.
 - Multi-writer leases, HA leader election, multi-repository coordination,
   service identity, federation, and enterprise policy are not core features.

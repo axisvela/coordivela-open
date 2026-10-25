@@ -1,0 +1,3808 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "serialNumber": "urn:uuid:a12073c2-182c-4655-8bd8-b36df3fd64bb",
+  "metadata": {
+    "timestamp": "2026-10-25T02:00:34.667Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "npm",
+          "version": "11.16.0"
+        },
+        {
+          "type": "application",
+          "name": "cyclonedx-npm",
+          "group": "@cyclonedx",
+          "version": "6.0.1",
+          "author": "Jan Kowalleck",
+          "description": "Create CycloneDX Software Bill of Materials (SBOM) from NPM projects.",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-node-npm.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-node-npm#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-node-npm/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:constraint:engine:node",
+              "value": ">=20.18.0"
+            },
+            {
+              "name": "cdx:npm:package:constraint:engine:npm",
+              "value": ">=9"
+            }
+          ]
+        },
+        {
+          "type": "library",
+          "name": "cyclonedx-library",
+          "group": "@cyclonedx",
+          "version": "10.3.0",
+          "author": "Jan Kowalleck",
+          "description": "Core functionality of CycloneDX for JavaScript (Node.js or WebBrowser).",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-javascript-library.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:constraint:engine:node",
+              "value": ">=20.18.0"
+            }
+          ]
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "coordivela-frontend",
+      "version": "1.7.2",
+      "bom-ref": "coordivela-frontend@1.7.2",
+      "purl": "pkg:npm/coordivela-frontend@1.7.2",
+      "properties": [
+        {
+          "name": "cdx:npm:package:private",
+          "value": "true"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": ""
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "react-dom",
+      "group": "@types",
+      "version": "19.3.0",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/react-dom@19.3.0",
+      "description": "TypeScript definitions for react-dom",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/react-dom@19.3.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/react-dom",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.3.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/react-dom"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "group": "@types",
+      "version": "19.3.0",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/react@19.3.0",
+      "description": "TypeScript definitions for react",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/react@19.3.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/react",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/react/-/react-19.3.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/react"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "plugin-react",
+      "group": "@vitejs",
+      "version": "4.7.0",
+      "bom-ref": "coordivela-frontend@1.7.2|@vitejs/plugin-react@4.7.0",
+      "author": "Evan You",
+      "description": "The default Vite plugin for React projects",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40vitejs/plugin-react@4.7.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/vitejs/vite-plugin-react.git#packages/plugin-react",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/vitejs/vite-plugin-react/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-4.7.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": "^14.18.0 || >=16.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitejs/plugin-react"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react-dom",
+      "version": "19.3.1",
+      "bom-ref": "coordivela-frontend@1.7.2|react-dom@19.3.1",
+      "description": "React package for working with the DOM.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/react-dom@19.3.1",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/react/react.git#packages/react-dom",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://react.dev/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/react/react/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/react-dom/-/react-dom-19.3.1.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-dom"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "version": "19.3.1",
+      "bom-ref": "coordivela-frontend@1.7.2|react@19.3.1",
+      "description": "React is a JavaScript library for building user interfaces.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/react@19.3.1",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/react/react.git#packages/react",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://react.dev/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/react/react/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/react/-/react-19.3.1.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=0.10.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "typescript",
+      "version": "5.9.3",
+      "bom-ref": "coordivela-frontend@1.7.2|typescript@5.9.3",
+      "author": "Microsoft Corp.",
+      "description": "TypeScript is a language for application scale JavaScript development",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/typescript@5.9.3",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/microsoft/TypeScript.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://www.typescriptlang.org/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/microsoft/TypeScript/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=14.17"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/typescript"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "vite",
+      "version": "6.4.4",
+      "bom-ref": "coordivela-frontend@1.7.2|vite@6.4.4",
+      "author": "Evan You",
+      "description": "Native-ESM powered web dev build tool",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/vite@6.4.4",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/vitejs/vite.git#packages/vite",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://vite.dev",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/vitejs/vite/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/vite/-/vite-6.4.4.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": "^18.0.0 || ^20.0.0 || >=22.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/vite"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "csstype",
+      "version": "3.2.3",
+      "bom-ref": "coordivela-frontend@1.7.2|csstype@3.2.3",
+      "author": "Fredrik Nicol",
+      "description": "Strict TypeScript and Flow types for style based on MDN data",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/csstype@3.2.3",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/frenic/csstype.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/frenic/csstype#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/frenic/csstype/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/csstype"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "core",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/core@7.29.7",
+      "author": "The Babel Team",
+      "description": "Babel compiler core.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/core@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-core",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-core",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20core%22+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/core/-/core-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "plugin-transform-react-jsx-self",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/plugin-transform-react-jsx-self@7.29.7",
+      "author": "The Babel Team",
+      "description": "Add a __self prop to all JSX Elements",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/plugin-transform-react-jsx-self@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-plugin-transform-react-jsx-self",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-plugin-transform-react-jsx-self",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/plugin-transform-react-jsx-self"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "plugin-transform-react-jsx-source",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/plugin-transform-react-jsx-source@7.29.7",
+      "author": "The Babel Team",
+      "description": "Add a __source prop to all JSX Elements",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/plugin-transform-react-jsx-source@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-plugin-transform-react-jsx-source",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-plugin-transform-react-jsx-source",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/plugin-transform-react-jsx-source"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pluginutils",
+      "group": "@rolldown",
+      "version": "1.0.0-beta.27",
+      "bom-ref": "coordivela-frontend@1.7.2|@rolldown/pluginutils@1.0.0-beta.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40rolldown/pluginutils@1.0.0-beta.27",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/rolldown/rolldown.git#packages/pluginutils",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/rolldown/rolldown#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/rolldown/rolldown/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.0-beta.27.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/pluginutils"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "babel__core",
+      "group": "@types",
+      "version": "7.20.5",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/babel__core@7.20.5",
+      "description": "TypeScript definitions for @babel/core",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/babel__core@7.20.5",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/babel__core",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__core",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.20.5.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/babel__core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react-refresh",
+      "version": "0.17.0",
+      "bom-ref": "coordivela-frontend@1.7.2|react-refresh@0.17.0",
+      "description": "React is a JavaScript library for building user interfaces.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/react-refresh@0.17.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/facebook/react.git#packages/react",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://react.dev/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/facebook/react/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/react-refresh/-/react-refresh-0.17.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=0.10.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-refresh"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "scheduler",
+      "version": "0.28.0",
+      "bom-ref": "coordivela-frontend@1.7.2|scheduler@0.28.0",
+      "description": "Cooperative scheduler for the browser environment.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/scheduler@0.28.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/react/react.git#packages/scheduler",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://react.dev/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/react/react/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/scheduler/-/scheduler-0.28.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/scheduler"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "esbuild",
+      "version": "0.25.12",
+      "bom-ref": "coordivela-frontend@1.7.2|esbuild@0.25.12",
+      "description": "An extremely fast JavaScript and CSS bundler and minifier.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/esbuild@0.25.12",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/evanw/esbuild.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/evanw/esbuild#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/evanw/esbuild/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/esbuild/-/esbuild-0.25.12.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=18"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/esbuild"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "fdir",
+      "version": "6.5.0",
+      "bom-ref": "coordivela-frontend@1.7.2|fdir@6.5.0",
+      "author": "thecodrr",
+      "description": "The fastest directory crawler & globbing alternative to glob, fast-glob, & tiny-glob. Crawls 1m files in < 1s",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/fdir@6.5.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/thecodrr/fdir.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/thecodrr/fdir#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/thecodrr/fdir/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=12.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/fdir"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "picomatch",
+      "version": "4.0.7",
+      "bom-ref": "coordivela-frontend@1.7.2|picomatch@4.0.7",
+      "author": "Jon Schlinkert",
+      "description": "Blazing fast and accurate glob matcher written in JavaScript, with no dependencies and full support for standard and extended Bash glob features, including braces, extglobs, POSIX brackets, and regular expressions.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/picomatch@4.0.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/micromatch/picomatch.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/micromatch/picomatch",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/micromatch/picomatch/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=12"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/picomatch"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "postcss",
+      "version": "8.5.30",
+      "bom-ref": "coordivela-frontend@1.7.2|postcss@8.5.30",
+      "author": "Andrey Sitnik",
+      "description": "Tool for transforming styles with JS plugins",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/postcss@8.5.30",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/postcss/postcss.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://postcss.org/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/postcss/postcss/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/postcss/-/postcss-8.5.30.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": "^10 || ^12 || >=14"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/postcss"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "rollup",
+      "version": "4.64.9",
+      "bom-ref": "coordivela-frontend@1.7.2|rollup@4.64.9",
+      "author": "Rich Harris",
+      "description": "Next-generation ES module bundler",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/rollup@4.64.9",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/rollup/rollup.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://rollupjs.org/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/rollup/rollup/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/rollup/-/rollup-4.64.9.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=18.0.0"
+        },
+        {
+          "name": "cdx:npm:package:constraint:engine:npm",
+          "value": ">=8.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/rollup"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tinyglobby",
+      "version": "0.2.17",
+      "bom-ref": "coordivela-frontend@1.7.2|tinyglobby@0.2.17",
+      "author": "Superchupu",
+      "description": "A fast and minimal alternative to globby and fast-glob",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/tinyglobby@0.2.17",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/SuperchupuDev/tinyglobby.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://superchupu.dev/tinyglobby",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/SuperchupuDev/tinyglobby/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=12.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tinyglobby"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "code-frame",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/code-frame@7.29.7",
+      "author": "The Babel Team",
+      "description": "Generate errors that contain a code frame that point to source locations.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/code-frame@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-code-frame",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-code-frame",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/code-frame"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "generator",
+      "group": "@babel",
+      "version": "7.29.8",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/generator@7.29.8",
+      "author": "The Babel Team",
+      "description": "Turns an AST into code.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/generator@7.29.8",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-generator",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-generator",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20generator%22+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/generator/-/generator-7.29.8.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/generator"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-compilation-targets",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-compilation-targets@7.29.7",
+      "author": "The Babel Team",
+      "description": "Helper functions on Babel compilation targets",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-compilation-targets@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-compilation-targets",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/babel/babel#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-compilation-targets/-/helper-compilation-targets-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-compilation-targets"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-module-transforms",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-module-transforms@7.29.7",
+      "author": "The Babel Team",
+      "description": "Babel helper functions for implementing ES6 module transformations",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-module-transforms@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-module-transforms",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-helper-module-transforms",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-module-transforms/-/helper-module-transforms-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-module-transforms"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helpers",
+      "group": "@babel",
+      "version": "7.29.10",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helpers@7.29.10",
+      "author": "The Babel Team",
+      "description": "Collection of helper functions used by Babel transforms.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helpers@7.29.10",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helpers",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-helpers",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helpers/-/helpers-7.29.10.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helpers"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "parser",
+      "group": "@babel",
+      "version": "7.29.9",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+      "author": "The Babel Team",
+      "description": "A JavaScript parser",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/parser@7.29.9",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-parser",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-parser",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A+parser+%28babylon%29%22+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/parser/-/parser-7.29.9.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/parser"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "template",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/template@7.29.7",
+      "author": "The Babel Team",
+      "description": "Generate an AST from a string template.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/template@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-template",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-template",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20template%22+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/template/-/template-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/template"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "traverse",
+      "group": "@babel",
+      "version": "7.29.10",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/traverse@7.29.10",
+      "author": "The Babel Team",
+      "description": "The Babel Traverse module maintains the overall tree state, and is responsible for replacing, removing, and adding nodes",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/traverse@7.29.10",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-traverse",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-traverse",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20traverse%22+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/traverse/-/traverse-7.29.10.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/traverse"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "types",
+      "group": "@babel",
+      "version": "7.29.8",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/types@7.29.8",
+      "author": "The Babel Team",
+      "description": "Babel Types is a Lodash-esque utility library for AST nodes",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/types@7.29.8",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-types",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-types",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20types%22+is%3Aopen",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/types/-/types-7.29.8.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/types"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "remapping",
+      "group": "@jridgewell",
+      "version": "2.3.5",
+      "bom-ref": "coordivela-frontend@1.7.2|@jridgewell/remapping@2.3.5",
+      "author": "Justin Ridgewell",
+      "description": "Remap sequential sourcemaps through transformations to point at the original source code",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40jridgewell/remapping@2.3.5",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/jridgewell/sourcemaps.git#packages/remapping",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/tree/main/packages/remapping",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@jridgewell/remapping/-/remapping-2.3.5.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@jridgewell/remapping"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "convert-source-map",
+      "version": "2.0.0",
+      "bom-ref": "coordivela-frontend@1.7.2|convert-source-map@2.0.0",
+      "author": "Thorsten Lorenz",
+      "description": "Converts a source-map from/to  different formats and allows adding/changing properties.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/convert-source-map@2.0.0",
+      "externalReferences": [
+        {
+          "url": "git://github.com/thlorenz/convert-source-map.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/thlorenz/convert-source-map",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/thlorenz/convert-source-map/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/convert-source-map/-/convert-source-map-2.0.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/convert-source-map"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "debug",
+      "version": "4.4.3",
+      "bom-ref": "coordivela-frontend@1.7.2|debug@4.4.3",
+      "author": "Josh Junon",
+      "description": "Lightweight debugging utility for Node.js and the browser",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/debug@4.4.3",
+      "externalReferences": [
+        {
+          "url": "git://github.com/debug-js/debug.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/debug-js/debug#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/debug-js/debug/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/debug"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "gensync",
+      "version": "1.0.0-beta.2",
+      "bom-ref": "coordivela-frontend@1.7.2|gensync@1.0.0-beta.2",
+      "author": "Logan Smyth",
+      "description": "Allows users to use generators in order to write common functions that can be both sync or async.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/gensync@1.0.0-beta.2",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/loganfsmyth/gensync.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/loganfsmyth/gensync",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/loganfsmyth/gensync/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/gensync/-/gensync-1.0.0-beta.2.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/gensync"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "json5",
+      "version": "2.2.3",
+      "bom-ref": "coordivela-frontend@1.7.2|json5@2.2.3",
+      "author": "Aseem Kishore",
+      "description": "JSON for Humans",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/json5@2.2.3",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/json5/json5.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "http://json5.org/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/json5/json5/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/json5"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "semver",
+      "version": "6.3.1",
+      "bom-ref": "coordivela-frontend@1.7.2|semver@6.3.1",
+      "author": "GitHub Inc.",
+      "description": "The semantic version parser used by npm.",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/semver@6.3.1",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/npm/node-semver.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/npm/node-semver#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/npm/node-semver/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/semver"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-plugin-utils",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-plugin-utils@7.29.7",
+      "author": "The Babel Team",
+      "description": "General utilities for plugins to use",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-plugin-utils@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-plugin-utils",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-helper-plugin-utils",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-plugin-utils/-/helper-plugin-utils-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-plugin-utils"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "babel__generator",
+      "group": "@types",
+      "version": "7.27.0",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/babel__generator@7.27.0",
+      "description": "TypeScript definitions for @babel/generator",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/babel__generator@7.27.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/babel__generator",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__generator",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/babel__generator/-/babel__generator-7.27.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/babel__generator"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "babel__template",
+      "group": "@types",
+      "version": "7.4.4",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/babel__template@7.4.4",
+      "description": "TypeScript definitions for @babel/template",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/babel__template@7.4.4",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/babel__template",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__template",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/babel__template/-/babel__template-7.4.4.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/babel__template"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "babel__traverse",
+      "group": "@types",
+      "version": "7.28.0",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/babel__traverse@7.28.0",
+      "description": "TypeScript definitions for @babel/traverse",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/babel__traverse@7.28.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/babel__traverse",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__traverse",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/babel__traverse/-/babel__traverse-7.28.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/babel__traverse"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "win32-x64",
+      "group": "@esbuild",
+      "version": "0.25.12",
+      "bom-ref": "coordivela-frontend@1.7.2|@esbuild/win32-x64@0.25.12",
+      "description": "The Windows 64-bit binary for esbuild, a JavaScript bundler.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40esbuild/win32-x64@0.25.12",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/evanw/esbuild.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/evanw/esbuild#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/evanw/esbuild/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.25.12.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=18"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@esbuild/win32-x64"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "nanoid",
+      "version": "3.3.20",
+      "bom-ref": "coordivela-frontend@1.7.2|nanoid@3.3.20",
+      "author": "Andrey Sitnik",
+      "description": "A tiny (116 bytes), secure URL-friendly unique string ID generator",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/nanoid@3.3.20",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/ai/nanoid.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/ai/nanoid#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/ai/nanoid/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.20.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": "^10 || ^12 || ^13.7 || ^14 || >=15.0.1"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/nanoid"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "picocolors",
+      "version": "1.1.1",
+      "bom-ref": "coordivela-frontend@1.7.2|picocolors@1.1.1",
+      "author": "Alexey Raspopov",
+      "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/picocolors@1.1.1",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/alexeyraspopov/picocolors.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/alexeyraspopov/picocolors#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/alexeyraspopov/picocolors/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/picocolors"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "source-map-js",
+      "version": "1.2.2",
+      "bom-ref": "coordivela-frontend@1.7.2|source-map-js@1.2.2",
+      "author": "Valentin 7rulnik Semirulnik",
+      "description": "Generates and consumes source maps",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/source-map-js@1.2.2",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/7rulnik/source-map-js.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/7rulnik/source-map-js",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/7rulnik/source-map-js/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.2.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=0.10.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/source-map-js"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "rollup-win32-x64-gnu",
+      "group": "@rollup",
+      "version": "4.64.9",
+      "bom-ref": "coordivela-frontend@1.7.2|@rollup/rollup-win32-x64-gnu@4.64.9",
+      "author": "Lukas Taegert-Atkinson",
+      "description": "Native bindings for Rollup",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40rollup/rollup-win32-x64-gnu@4.64.9",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/rollup/rollup.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://rollupjs.org/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/rollup/rollup/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@rollup/rollup-win32-x64-gnu/-/rollup-win32-x64-gnu-4.64.9.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rollup/rollup-win32-x64-gnu"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "rollup-win32-x64-msvc",
+      "group": "@rollup",
+      "version": "4.64.9",
+      "bom-ref": "coordivela-frontend@1.7.2|@rollup/rollup-win32-x64-msvc@4.64.9",
+      "author": "Lukas Taegert-Atkinson",
+      "description": "Native bindings for Rollup",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40rollup/rollup-win32-x64-msvc@4.64.9",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/rollup/rollup.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://rollupjs.org/",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/rollup/rollup/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.64.9.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rollup/rollup-win32-x64-msvc"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "estree",
+      "group": "@types",
+      "version": "1.0.9",
+      "bom-ref": "coordivela-frontend@1.7.2|@types/estree@1.0.9",
+      "description": "TypeScript definitions for estree",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40types/estree@1.0.9",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git#types/estree",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@types/estree/-/estree-1.0.9.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/estree"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-validator-identifier",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-validator-identifier@7.29.7",
+      "author": "The Babel Team",
+      "description": "Validate identifier/keywords name",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-validator-identifier@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-validator-identifier",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/babel/babel#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-validator-identifier"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "js-tokens",
+      "version": "4.0.0",
+      "bom-ref": "coordivela-frontend@1.7.2|js-tokens@4.0.0",
+      "author": "Simon Lydell",
+      "description": "A regex that tokenizes JavaScript.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/js-tokens@4.0.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/lydell/js-tokens.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/lydell/js-tokens#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/lydell/js-tokens/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/js-tokens"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "gen-mapping",
+      "group": "@jridgewell",
+      "version": "0.3.13",
+      "bom-ref": "coordivela-frontend@1.7.2|@jridgewell/gen-mapping@0.3.13",
+      "author": "Justin Ridgewell",
+      "description": "Generate source maps",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40jridgewell/gen-mapping@0.3.13",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/jridgewell/sourcemaps.git#packages/gen-mapping",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/tree/main/packages/gen-mapping",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@jridgewell/gen-mapping"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "trace-mapping",
+      "group": "@jridgewell",
+      "version": "0.3.31",
+      "bom-ref": "coordivela-frontend@1.7.2|@jridgewell/trace-mapping@0.3.31",
+      "author": "Justin Ridgewell",
+      "description": "Trace the original position through a source map",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40jridgewell/trace-mapping@0.3.31",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/jridgewell/sourcemaps.git#packages/trace-mapping",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/tree/main/packages/trace-mapping",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@jridgewell/trace-mapping"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jsesc",
+      "version": "3.1.0",
+      "bom-ref": "coordivela-frontend@1.7.2|jsesc@3.1.0",
+      "author": "Mathias Bynens",
+      "description": "Given some data, jsesc returns the shortest possible stringified & ASCII-safe representation of that data.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/jsesc@3.1.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/mathiasbynens/jsesc.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://mths.be/jsesc",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/mathiasbynens/jsesc/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/jsesc/-/jsesc-3.1.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/jsesc"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "compat-data",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/compat-data@7.29.7",
+      "author": "The Babel Team",
+      "description": "The compat-data to determine required Babel plugins",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/compat-data@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-compat-data",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/babel/babel#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/compat-data"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-validator-option",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-validator-option@7.29.7",
+      "author": "The Babel Team",
+      "description": "Validate plugin/preset options",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-validator-option@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-validator-option",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/babel/babel#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-validator-option/-/helper-validator-option-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-validator-option"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "browserslist",
+      "version": "4.29.3",
+      "bom-ref": "coordivela-frontend@1.7.2|browserslist@4.29.3",
+      "author": "Andrey Sitnik",
+      "description": "Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-env-preset",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/browserslist@4.29.3",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/browserslist/browserslist.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/browserslist/browserslist#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/browserslist/browserslist/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/browserslist/-/browserslist-4.29.3.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": "^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/browserslist"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lru-cache",
+      "version": "5.1.1",
+      "bom-ref": "coordivela-frontend@1.7.2|lru-cache@5.1.1",
+      "author": "Isaac Z. Schlueter",
+      "description": "A cache object that deletes the least-recently-used items.",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/lru-cache@5.1.1",
+      "externalReferences": [
+        {
+          "url": "git://github.com/isaacs/node-lru-cache.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/isaacs/node-lru-cache#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/isaacs/node-lru-cache/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lru-cache"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-module-imports",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-module-imports@7.29.7",
+      "author": "The Babel Team",
+      "description": "Babel helper functions for inserting module loads",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-module-imports@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-module-imports",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-helper-module-imports",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-module-imports/-/helper-module-imports-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-module-imports"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-globals",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-globals@7.29.7",
+      "author": "The Babel Team",
+      "description": "A collection of JavaScript globals for Babel internal usage",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-globals@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-globals",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/babel/babel#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-globals/-/helper-globals-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-globals"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helper-string-parser",
+      "group": "@babel",
+      "version": "7.29.7",
+      "bom-ref": "coordivela-frontend@1.7.2|@babel/helper-string-parser@7.29.7",
+      "author": "The Babel Team",
+      "description": "A utility package to parse strings",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-string-parser@7.29.7",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/babel/babel.git#packages/babel-helper-string-parser",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://babel.dev/docs/en/next/babel-helper-string-parser",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/babel/babel/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@babel/helper-string-parser/-/helper-string-parser-7.29.7.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.9.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-string-parser"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ms",
+      "version": "2.1.3",
+      "bom-ref": "coordivela-frontend@1.7.2|ms@2.1.3",
+      "description": "Tiny millisecond conversion utility",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/ms@2.1.3",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/vercel/ms.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/vercel/ms#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/vercel/ms/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/ms"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "sourcemap-codec",
+      "group": "@jridgewell",
+      "version": "1.6.0",
+      "bom-ref": "coordivela-frontend@1.7.2|@jridgewell/sourcemap-codec@1.6.0",
+      "author": "Justin Ridgewell",
+      "description": "Encode/decode sourcemap mappings",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40jridgewell/sourcemap-codec@1.6.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/jridgewell/sourcemaps.git#packages/sourcemap-codec",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/tree/main/packages/sourcemap-codec",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/jridgewell/sourcemaps/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@jridgewell/sourcemap-codec"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "resolve-uri",
+      "group": "@jridgewell",
+      "version": "3.1.2",
+      "bom-ref": "coordivela-frontend@1.7.2|@jridgewell/resolve-uri@3.1.2",
+      "author": "Justin Ridgewell",
+      "description": "Resolve a URI relative to an optional base URI",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40jridgewell/resolve-uri@3.1.2",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/jridgewell/resolve-uri.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/jridgewell/resolve-uri#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/jridgewell/resolve-uri/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@jridgewell/resolve-uri"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "baseline-browser-mapping",
+      "version": "2.11.29",
+      "bom-ref": "coordivela-frontend@1.7.2|baseline-browser-mapping@2.11.29",
+      "description": "A library for obtaining browser versions with their maximum supported Baseline feature set and Widely Available status.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/baseline-browser-mapping@2.11.29",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/web-platform-dx/baseline-browser-mapping.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/web-platform-dx/baseline-browser-mapping#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/web-platform-dx/baseline-browser-mapping/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/baseline-browser-mapping/-/baseline-browser-mapping-2.11.29.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/baseline-browser-mapping"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "caniuse-lite",
+      "version": "1.0.30001816",
+      "bom-ref": "coordivela-frontend@1.7.2|caniuse-lite@1.0.30001816",
+      "author": "Ben Briggs",
+      "description": "A smaller version of caniuse-db, with only the essentials!",
+      "licenses": [
+        {
+          "license": {
+            "id": "CC-BY-4.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/caniuse-lite@1.0.30001816",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/browserslist/caniuse-lite.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/browserslist/caniuse-lite#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/browserslist/caniuse-lite/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001816.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/caniuse-lite"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "electron-to-chromium",
+      "version": "1.5.459",
+      "bom-ref": "coordivela-frontend@1.7.2|electron-to-chromium@1.5.459",
+      "author": "Kilian Valkhof",
+      "description": "Provides a list of electron-to-chromium version mappings",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/electron-to-chromium@1.5.459",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/Kilian/electron-to-chromium.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/Kilian/electron-to-chromium#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/Kilian/electron-to-chromium/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.459.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/electron-to-chromium"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "node-releases",
+      "version": "2.0.59",
+      "bom-ref": "coordivela-frontend@1.7.2|node-releases@2.0.59",
+      "author": "Sergey Rubanov",
+      "description": "Node.js releases data",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/node-releases@2.0.59",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/chicoxyzzy/node-releases.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/chicoxyzzy/node-releases#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/chicoxyzzy/node-releases/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/node-releases/-/node-releases-2.0.59.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=18"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/node-releases"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "update-browserslist-db",
+      "version": "1.3.4",
+      "bom-ref": "coordivela-frontend@1.7.2|update-browserslist-db@1.3.4",
+      "author": "Andrey Sitnik",
+      "description": "CLI tool to update caniuse-lite to refresh target browsers from Browserslist config",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/update-browserslist-db@1.3.4",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/browserslist/update-db.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/browserslist/update-db#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/browserslist/update-db/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/update-browserslist-db/-/update-browserslist-db-1.3.4.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/update-browserslist-db"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "yallist",
+      "version": "3.1.1",
+      "bom-ref": "coordivela-frontend@1.7.2|yallist@3.1.1",
+      "author": "Isaac Z. Schlueter",
+      "description": "Yet Another Linked List",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/yallist@3.1.1",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/isaacs/yallist.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/isaacs/yallist#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/isaacs/yallist/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/yallist/-/yallist-3.1.1.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/yallist"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "escalade",
+      "version": "3.2.0",
+      "bom-ref": "coordivela-frontend@1.7.2|escalade@3.2.0",
+      "author": "Luke Edwards",
+      "description": "A tiny (183B to 210B) and fast utility to ascend parent directories",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/escalade@3.2.0",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/lukeed/escalade.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/lukeed/escalade#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/lukeed/escalade/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "https://registry.npmjs.org/escalade/-/escalade-3.2.0.tgz",
+          "type": "distribution",
+          "comment": "as detected from npm-ls property \"resolved\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": ">=6"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/escalade"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "coordivela-frontend@1.7.2",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@types/react-dom@19.3.0",
+        "coordivela-frontend@1.7.2|@types/react@19.3.0",
+        "coordivela-frontend@1.7.2|@vitejs/plugin-react@4.7.0",
+        "coordivela-frontend@1.7.2|react-dom@19.3.1",
+        "coordivela-frontend@1.7.2|react@19.3.1",
+        "coordivela-frontend@1.7.2|typescript@5.9.3",
+        "coordivela-frontend@1.7.2|vite@6.4.4"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/react-dom@19.3.0",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@types/react@19.3.0"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/react@19.3.0",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|csstype@3.2.3"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@vitejs/plugin-react@4.7.0",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/core@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/plugin-transform-react-jsx-self@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/plugin-transform-react-jsx-source@7.29.7",
+        "coordivela-frontend@1.7.2|@rolldown/pluginutils@1.0.0-beta.27",
+        "coordivela-frontend@1.7.2|@types/babel__core@7.20.5",
+        "coordivela-frontend@1.7.2|react-refresh@0.17.0",
+        "coordivela-frontend@1.7.2|vite@6.4.4"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|react-dom@19.3.1",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|react@19.3.1",
+        "coordivela-frontend@1.7.2|scheduler@0.28.0"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|react@19.3.1"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|typescript@5.9.3"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|vite@6.4.4",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|esbuild@0.25.12",
+        "coordivela-frontend@1.7.2|fdir@6.5.0",
+        "coordivela-frontend@1.7.2|picomatch@4.0.7",
+        "coordivela-frontend@1.7.2|postcss@8.5.30",
+        "coordivela-frontend@1.7.2|rollup@4.64.9",
+        "coordivela-frontend@1.7.2|tinyglobby@0.2.17"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|csstype@3.2.3"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/core@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/code-frame@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/generator@7.29.8",
+        "coordivela-frontend@1.7.2|@babel/helper-compilation-targets@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-module-transforms@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helpers@7.29.10",
+        "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+        "coordivela-frontend@1.7.2|@babel/template@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/traverse@7.29.10",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8",
+        "coordivela-frontend@1.7.2|@jridgewell/remapping@2.3.5",
+        "coordivela-frontend@1.7.2|convert-source-map@2.0.0",
+        "coordivela-frontend@1.7.2|debug@4.4.3",
+        "coordivela-frontend@1.7.2|gensync@1.0.0-beta.2",
+        "coordivela-frontend@1.7.2|json5@2.2.3",
+        "coordivela-frontend@1.7.2|semver@6.3.1"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/plugin-transform-react-jsx-self@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/core@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-plugin-utils@7.29.7"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/plugin-transform-react-jsx-source@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/core@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-plugin-utils@7.29.7"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@rolldown/pluginutils@1.0.0-beta.27"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/babel__core@7.20.5",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8",
+        "coordivela-frontend@1.7.2|@types/babel__generator@7.27.0",
+        "coordivela-frontend@1.7.2|@types/babel__template@7.4.4",
+        "coordivela-frontend@1.7.2|@types/babel__traverse@7.28.0"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|react-refresh@0.17.0"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|scheduler@0.28.0"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|esbuild@0.25.12",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@esbuild/win32-x64@0.25.12"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|fdir@6.5.0",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|picomatch@4.0.7"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|picomatch@4.0.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|postcss@8.5.30",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|nanoid@3.3.20",
+        "coordivela-frontend@1.7.2|picocolors@1.1.1",
+        "coordivela-frontend@1.7.2|source-map-js@1.2.2"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|rollup@4.64.9",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@rollup/rollup-win32-x64-gnu@4.64.9",
+        "coordivela-frontend@1.7.2|@rollup/rollup-win32-x64-msvc@4.64.9",
+        "coordivela-frontend@1.7.2|@types/estree@1.0.9"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|tinyglobby@0.2.17",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|fdir@6.5.0",
+        "coordivela-frontend@1.7.2|picomatch@4.0.7"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/code-frame@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/helper-validator-identifier@7.29.7",
+        "coordivela-frontend@1.7.2|js-tokens@4.0.0",
+        "coordivela-frontend@1.7.2|picocolors@1.1.1"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/generator@7.29.8",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8",
+        "coordivela-frontend@1.7.2|@jridgewell/gen-mapping@0.3.13",
+        "coordivela-frontend@1.7.2|@jridgewell/trace-mapping@0.3.31",
+        "coordivela-frontend@1.7.2|jsesc@3.1.0"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-compilation-targets@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/compat-data@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-validator-option@7.29.7",
+        "coordivela-frontend@1.7.2|browserslist@4.29.3",
+        "coordivela-frontend@1.7.2|lru-cache@5.1.1",
+        "coordivela-frontend@1.7.2|semver@6.3.1"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-module-transforms@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/core@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-module-imports@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-validator-identifier@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/traverse@7.29.10"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helpers@7.29.10",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/template@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/template@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/code-frame@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/traverse@7.29.10",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/code-frame@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/generator@7.29.8",
+        "coordivela-frontend@1.7.2|@babel/helper-globals@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+        "coordivela-frontend@1.7.2|@babel/template@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8",
+        "coordivela-frontend@1.7.2|debug@4.4.3"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/types@7.29.8",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/helper-string-parser@7.29.7",
+        "coordivela-frontend@1.7.2|@babel/helper-validator-identifier@7.29.7"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@jridgewell/remapping@2.3.5",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@jridgewell/gen-mapping@0.3.13",
+        "coordivela-frontend@1.7.2|@jridgewell/trace-mapping@0.3.31"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|convert-source-map@2.0.0"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|debug@4.4.3",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|ms@2.1.3"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|gensync@1.0.0-beta.2"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|json5@2.2.3"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|semver@6.3.1"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-plugin-utils@7.29.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/babel__generator@7.27.0",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/babel__template@7.4.4",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/parser@7.29.9",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/babel__traverse@7.28.0",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@esbuild/win32-x64@0.25.12"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|nanoid@3.3.20"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|picocolors@1.1.1"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|source-map-js@1.2.2"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@rollup/rollup-win32-x64-gnu@4.64.9"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@rollup/rollup-win32-x64-msvc@4.64.9"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@types/estree@1.0.9"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-validator-identifier@7.29.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|js-tokens@4.0.0"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@jridgewell/gen-mapping@0.3.13",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@jridgewell/sourcemap-codec@1.6.0",
+        "coordivela-frontend@1.7.2|@jridgewell/trace-mapping@0.3.31"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@jridgewell/trace-mapping@0.3.31",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@jridgewell/resolve-uri@3.1.2",
+        "coordivela-frontend@1.7.2|@jridgewell/sourcemap-codec@1.6.0"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|jsesc@3.1.0"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/compat-data@7.29.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-validator-option@7.29.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|browserslist@4.29.3",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|baseline-browser-mapping@2.11.29",
+        "coordivela-frontend@1.7.2|caniuse-lite@1.0.30001816",
+        "coordivela-frontend@1.7.2|electron-to-chromium@1.5.459",
+        "coordivela-frontend@1.7.2|node-releases@2.0.59",
+        "coordivela-frontend@1.7.2|update-browserslist-db@1.3.4"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|lru-cache@5.1.1",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|yallist@3.1.1"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-module-imports@7.29.7",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|@babel/traverse@7.29.10",
+        "coordivela-frontend@1.7.2|@babel/types@7.29.8"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-globals@7.29.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@babel/helper-string-parser@7.29.7"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|ms@2.1.3"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@jridgewell/sourcemap-codec@1.6.0"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|@jridgewell/resolve-uri@3.1.2"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|baseline-browser-mapping@2.11.29"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|caniuse-lite@1.0.30001816"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|electron-to-chromium@1.5.459"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|node-releases@2.0.59"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|update-browserslist-db@1.3.4",
+      "dependsOn": [
+        "coordivela-frontend@1.7.2|browserslist@4.29.3",
+        "coordivela-frontend@1.7.2|escalade@3.2.0",
+        "coordivela-frontend@1.7.2|picocolors@1.1.1"
+      ]
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|yallist@3.1.1"
+    },
+    {
+      "ref": "coordivela-frontend@1.7.2|escalade@3.2.0"
+    }
+  ]
+}

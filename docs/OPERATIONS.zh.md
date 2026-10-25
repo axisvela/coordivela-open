@@ -2,7 +2,7 @@
 
 # COORDIVELA 操作手册
 
-本手册覆盖社区版 COORDIVELA Core `1.7.1` 版本线：安装、配置、PostgreSQL
+本手册覆盖社区版 COORDIVELA Core `1.7.2` 版本线：安装、配置、PostgreSQL
 准备、启动、健康检查、备份、升级、监控和故障排查。
 
 本手册不覆盖企业身份与策略、多仓库协调、HA leader election、Harmovela 事件
@@ -16,7 +16,7 @@ COORDIVELA Core 面向单人或小团队，通常是一个仓库，参考规模�
 
 ## 前置条件
 
-- PostgreSQL 18.x。`1.7.1` 使用 PostgreSQL 18.1 验证。
+- PostgreSQL 18.x。`1.7.2` 使用 PostgreSQL 18.1 验证。
 - 以下平台之一的发布二进制：
   - `windows/amd64`
   - `linux/amd64`
@@ -30,10 +30,10 @@ COORDIVELA Core 面向单人或小团队，通常是一个仓库，参考规模�
 
 ## 从发布二进制安装
 
-从 [`releases/v1.7.1/`](../releases/v1.7.1/) 或 GitHub Release 下载对应平台
+从 [`releases/v1.7.2/`](../releases/v1.7.2/) 或 GitHub Release 下载对应平台
 压缩包：
 
-<https://github.com/axisvela/coordivela-open/releases/tag/v1.7.1>
+<https://github.com/axisvela/coordivela-open/releases/tag/v1.7.2>
 
 解压前先校验。
 
@@ -59,11 +59,11 @@ sha256sum -c SHA256SUMS
 - `LICENSE-COORDIVELA-CORE.txt` - AGPL-3.0 许可证。
 - `SHA256SUMS` - 目录内容的校验和。
 
-`1.7.1` 二进制压缩包不内嵌 SQL 迁移。请从 core tag 获取匹配的
+`1.7.2` 二进制压缩包不内嵌 SQL 迁移。请从 core tag 获取匹配的
 `backend/migrations` 目录：
 
 ```sh
-git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
+git clone --branch v1.7.2 https://github.com/axisvela/coordivela.git
 ```
 
 将 `coordivela/backend/migrations` 交给 `coordivela-migrate` 使用。
@@ -71,7 +71,7 @@ git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
 ## 从源码构建
 
 ```sh
-git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
+git clone --branch v1.7.2 https://github.com/axisvela/coordivela.git
 cd coordivela/backend
 GOWORK=off go build -trimpath -o ../coordivela ./cmd/coordivela
 GOWORK=off go build -trimpath -o ../coordivela-migrate ./cmd/coordivela-migrate
@@ -221,13 +221,13 @@ WantedBy=multi-user.target
 Core 仓库提供本地 compose profile：
 
 ```sh
-git clone --branch v1.7.1 https://github.com/axisvela/coordivela.git
+git clone --branch v1.7.2 https://github.com/axisvela/coordivela.git
 cd coordivela
 docker compose -f deploy/compose.yaml up --build
 ```
 
 该 profile 启动 PostgreSQL 和 API。它面向本地/开发，不是生产编排方案。
-`1.7.1` 没有发布官方容器镜像；请从源码构建或使用发布二进制。
+`1.7.2` 没有发布官方容器镜像；请从源码构建或使用发布二进制。
 
 ## 验证安装
 
@@ -240,7 +240,7 @@ curl -s http://127.0.0.1:1976/healthz
 预期：
 
 ```json
-{"status":"ok","version":"1.7.1"}
+{"status":"ok","version":"1.7.2"}
 ```
 
 就绪：
@@ -405,6 +405,6 @@ prompt。
 ## 已知限制
 
 - PRAXOVELA 的持久执行计时器证据仍由该产品负责。
-- `RuntimeAdapter` v1 自 `1.2.0` 起包含，`1.7.1` 继续提供。
+- `RuntimeAdapter` v1 自 `1.2.0` 起包含，`1.7.2` 继续提供。
 - 多写者租约、HA leader election、多仓库协调、服务身份、联邦和企业策略不是
   core 功能。
