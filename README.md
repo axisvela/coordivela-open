@@ -173,7 +173,7 @@ license, checksums, and SBOM. See [`releases/`](releases/) for the index.
 
 The OpenAPI contract is the source of truth for the public HTTP surface. SDKs
 must be generated or checked against it. Breaking changes require a major
-contract version. The current contract revision is `1.7.1`; it is versioned
+contract version. The current contract revision is `1.7.2`; it is versioned
 independently from the runtime and binary release line.
 
 ## License
