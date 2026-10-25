@@ -120,6 +120,8 @@ Known limitations:
 
 - PRAXOVELA durable execution-timer evidence remains outstanding in that
   product.
+- The published `v1.7.1` binaries were built with Go `1.26.9` and include
+  GO-2026-6809; a patch rebuild with Go `1.26.10` is pending.
 
 The OpenAPI contract is revision `1.7.1` and covers the published `/v1` routes,
 including coordination plans, claims, findings, directives, per-work-item

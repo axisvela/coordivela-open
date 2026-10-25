@@ -27,7 +27,7 @@ Core does not issue or verify service identities.
 - Port `1976` for the HTTP API. COORDIVELA reserves the `1976-1985` block.
 - `pg_dump` and `pg_restore` for backups and restore drills.
 - `curl` or another HTTP client for smoke tests.
-- Go 1.26.9 only when building from source.
+- Go 1.26.10 only when building from source.
 - A trusted gateway or reverse proxy that sets `X-Axis-Tenant`,
   `X-Axis-Workspace`, and optionally `X-Axis-Principal`. Do not accept these
   headers directly from untrusted clients.

@@ -24,7 +24,7 @@ COORDIVELA Core 面向单人或小团队，通常是一个仓库，参考规模�
 - HTTP API 端口 `1976`。COORDIVELA 保留 `1976-1985` 端口段。
 - 备份和恢复演练需要 `pg_dump` 与 `pg_restore`。
 - 冒烟测试需要 `curl` 或其他 HTTP 客户端。
-- 仅从源码构建时需要 Go 1.26.9。
+- 仅从源码构建时需要 Go 1.26.10。
 - 由受信任网关或反向代理设置 `X-Axis-Tenant`、`X-Axis-Workspace`，以及可选
   的 `X-Axis-Principal`。不要直接信任不可信客户端传入的这些头。
 

@@ -4,6 +4,12 @@ All notable changes to COORDIVELA Open are documented here.
 
 ## [Unreleased]
 
+### Security
+
+- The published `v1.7.1` binaries were built with Go `1.26.9` and include
+  GO-2026-6809 in `crypto/x509`. Rebuild and publish a patch release with Go
+  `1.26.10` before relying on the binaries.
+
 ### Documentation
 
 - Aligned `README.md`, `README.zh.md`, and both operations manuals to the 1.7.1
