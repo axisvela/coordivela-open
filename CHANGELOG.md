@@ -4,6 +4,13 @@ All notable changes to COORDIVELA Open are documented here.
 
 ## [Unreleased]
 
+### Documentation
+
+- Clarified Core/Open 1.7.2 and EE 1.0.0 source-release baselines, with separate
+  post-1.0 production acceptance and unchanged edition boundaries.
+- Added a public production-readiness index and six `help wanted` / `question`
+  issues for deployment feedback; no community approval is implied.
+
 ## [1.7.2] - 2026-10-25
 
 Security patch release. Rebuilds the published binaries with Go `1.26.10` and

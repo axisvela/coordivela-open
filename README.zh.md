@@ -90,7 +90,9 @@ Core 和 Open 共享版本线；EE 独立发布，并声明其支持的 core 版
 发布在 [`releases/v1.7.2/`](releases/v1.7.2/)，覆盖 windows/amd64、
 linux/amd64 和 darwin/arm64。
 
-Open 是分发面，继承 Core 的社区 1.x 成熟度；它不代表 EE 已生产就绪。Core 的
+Open 是分发面，继承 Core 的社区 1.x 成熟度；它不代表 EE 已生产就绪。
+EE `1.0.0` 是源级基线发布，生产门禁在 1.0 后继续推进；见
+[公开生产门禁 issue 与社区反馈入口](docs/production-readiness/README.md)。Core 的
 Go module tag `backend/v3.1.2` 位于 `dadf5bc`，覆盖 1.7.x 运行时和更新后的
 Harmovela module path；Open 二进制由各发布清单记录的 `v1.7.2` 源码提交构建。
 

@@ -108,7 +108,10 @@ binaries, checksums, and SBOMs are published under
 darwin/arm64.
 
 Open is the distribution surface and inherits Core's community 1.x maturity. It
-does not imply EE production readiness. The Core Go module tag
+does not imply EE production readiness. EE `1.0.0` is a source-level baseline;
+production gates continue after 1.0.0. See the
+[public production-gate issues and community feedback](docs/production-readiness/README.md).
+The Core Go module tag
 `backend/v3.1.2` is at `dadf5bc` and covers the 1.7.x runtime and the updated
 Harmovela module path; Open binaries are built from the `v1.7.2` source commit
 recorded in each manifest.
