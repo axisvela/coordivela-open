@@ -109,7 +109,7 @@ darwin/arm64.
 
 Open is the distribution surface and inherits Core's community 1.x maturity. It
 does not imply EE production readiness. The Core Go module tag
-`backend/v3.1.1` is at `4e8508a` and covers the 1.7.x runtime and the updated
+`backend/v3.1.2` is at `dadf5bc` and covers the 1.7.x runtime and the updated
 Harmovela module path; Open binaries are built from the `v1.7.1` source commit
 recorded in each manifest.
 
